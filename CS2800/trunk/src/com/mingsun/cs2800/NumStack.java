@@ -8,8 +8,8 @@ public class NumStack {
 		numstack = new Stack();
 	}
 
-	public final void push(final float value) {
-		entry = new Entry(value);
+	public final void push(final float object) {
+		entry = new Entry(object);
 		numstack.push(entry);
 	}
 

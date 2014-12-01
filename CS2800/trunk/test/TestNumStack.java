@@ -36,7 +36,7 @@ public class TestNumStack {
 	@Test
 	public final void testPushthenPop() throws MyException{
 		numstack.push(floatNumber);
-		assertEquals("TEST1: Push then Pop", floatNumber, numstack.pop());
+		assertEquals("TEST1: Push then Pop", floatNumber, numstack.pop(), 0f);
 	}
 	
 	@Test
