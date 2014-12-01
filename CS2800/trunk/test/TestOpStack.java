@@ -5,26 +5,19 @@ import org.junit.Test;
 
 import com.mingsun.cs2800.MyException;
 import com.mingsun.cs2800.NumStack;
+import com.mingsun.cs2800.OpStack;
+import com.mingsun.cs2800.Symbol;
 
-/**
- * 
- */
 
-/**
- * @author Ming
- *
- */
-public class TestNumStack {
-	private NumStack numstack;
-	private float floatNumber;
+public class TestOpStack {
+	private OpStack opstack;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		numstack = new NumStack();
-		floatNumber = 0;
+		opstack = new OpStack();
 	}
 	/*
 	@Test
@@ -35,12 +28,13 @@ public class TestNumStack {
 	*/
 	@Test
 	public final void testPushthenPop() throws MyException{
-		numstack.push(floatNumber);
-		assertEquals("TEST1: Push then Pop", floatNumber, numstack.pop());
+		opstack.push(Symbol.PLUS);
+		assertEquals("TEST1: Push then Pop", Symbol.PLUS, opstack.pop());
 	}
 	
 	@Test
 	public final void testIsEmpty(){
-		assertEquals("TEST: Is Emtpy", true, numstack.isEmpty());
+		assertEquals("TEST: Is Emtpy", true, opstack.isEmpty());
 	}
+
 }
