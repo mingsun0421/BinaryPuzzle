@@ -42,4 +42,5 @@ public enum Symbol {
 	 *            This is symbol not above.
 	 */
 	INVALID;
+	
 }

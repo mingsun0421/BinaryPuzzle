@@ -21,6 +21,14 @@ public class OpStack {
 		}
 	}
 	
+	public final Symbol top() throws MyException {
+		if(opstack.size() == 0){
+			throw new MyException("Empty Stack");
+		} else {
+			return opstack.top().getSymbol();
+		}
+	}
+	
 	public final boolean isEmpty(){
 		return opstack.size() == 0;
 	}
