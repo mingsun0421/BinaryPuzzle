@@ -7,7 +7,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
-
+//
 public class CalcView {
 
 	private JFrame frame;
