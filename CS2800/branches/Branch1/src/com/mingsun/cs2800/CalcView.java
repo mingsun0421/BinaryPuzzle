@@ -15,9 +15,12 @@ public class CalcView {
 
 	JFrame frame;
 	private String expression = "";
-	private String answer;
-	private boolean isInfix;
+	private float answer;
+	private String answerString;
+	private boolean isInfix = true;
 	private CalcModel model;
+	private JRadioButton rdbtnReversePolish;
+	private JRadioButton rdbtnNewRadioButton;
 
 	/**
 	 * Launch the application.
@@ -30,12 +33,12 @@ public class CalcView {
 		initialize();
 	}
 	
-	public String getExpression(){
+	public final String getExpression(){
 		return expression;
 	}
 	
-	public void setAnswer(String str){
-		answer = str;
+	public final void setAnswer(String str){
+		answerString = str;
 	}
 
 	/**
@@ -47,11 +50,32 @@ public class CalcView {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Infix");
+		rdbtnNewRadioButton = new JRadioButton("Infix");
+		rdbtnNewRadioButton.setSelected(true);
+		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				isInfix = true;
+				rdbtnReversePolish.setSelected(false);
+				if(!rdbtnNewRadioButton.isSelected()){
+					rdbtnReversePolish.setSelected(true);
+					isInfix = false;
+				}
+			}
+		});
 		rdbtnNewRadioButton.setBounds(11, 12, 155, 29);
 		frame.getContentPane().add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnReversePolish = new JRadioButton("Reverse Polish");
+		rdbtnReversePolish = new JRadioButton("Reverse Polish");
+		rdbtnReversePolish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				isInfix = false;
+				rdbtnNewRadioButton.setSelected(false);
+				if(!rdbtnReversePolish.isSelected()){
+					rdbtnNewRadioButton.setSelected(true);
+					isInfix = true;
+				}
+			}
+		});
 		rdbtnReversePolish.setBounds(11, 48, 155, 29);
 		frame.getContentPane().add(rdbtnReversePolish);
 		
@@ -64,10 +88,10 @@ public class CalcView {
 		txtrExpression.setBounds(424, 89, 89, 29);
 		frame.getContentPane().add(txtrExpression);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(21, 130, 383, 29);
-		textPane_1.setEditable(false);
-		frame.getContentPane().add(textPane_1);
+		JTextPane answerPane = new JTextPane();
+		answerPane.setBounds(21, 130, 383, 29);
+		answerPane.setEditable(false);
+		frame.getContentPane().add(answerPane);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setText("Result");
@@ -237,8 +261,28 @@ public class CalcView {
 		JButton button_15 = new JButton("=");
 		button_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				expression = "";
+				expression = textPane.getText();
 				textPane.setText(expression);
+				if(isInfix){
+					try {
+						StandardCalc stdCal = new StandardCalc();
+						answer = stdCal.evaluate(expression);
+					} catch (MyException e) {
+						e.printStackTrace();
+					}
+					answerString = Float.toString(answer);
+				}
+				else{
+					try {
+						RevPolishCalc revPoli = new RevPolishCalc();
+						answer = revPoli.evaluate(expression);
+					} catch (MyException e) {
+						e.printStackTrace();
+					}
+					answerString = Float.toString(answer);
+				}
+				answerPane.setText(answerString);;
+				expression = "";
 			}
 		});
 		button_15.setBounds(217, 399, 115, 29);
