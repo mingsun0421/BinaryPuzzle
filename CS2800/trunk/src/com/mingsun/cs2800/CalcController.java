@@ -13,7 +13,7 @@ import java.awt.EventQueue;
 	private static CalcView view;
 	/**
 	 * This is main method.
-	 * @param args String[]
+	 * @param args String[] Stirng array
 	 */
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
