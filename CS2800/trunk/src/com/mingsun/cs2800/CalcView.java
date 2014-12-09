@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 /**
  * This class is calculator's view.
  * @author Ming Sun email<zaac003@live.rhul.ac.uk>
- *
+ * @since 08/12/2014
  */
 public class CalcView {
 	/**
