@@ -1,7 +1,5 @@
 package com.mingsun.cs2800;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -11,22 +9,40 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-//
+/**
+ * This class is calculator's view.
+ * @author Ming Sun email<zaac003@live.rhul.ac.uk>
+ *
+ */
 public class CalcView {
-
-	JFrame frame;
-	private String expression = "";
-	private float answer;
-	private String answerString;
-	private boolean isInfix = true;
-	private CalcModel model;
-	private JRadioButton rdbtnReversePolish;
-	private JRadioButton rdbtnNewRadioButton;
-
 	/**
-	 * Launch the application.
+	 * @param frame JFrame
 	 */
+	JFrame frame;
+	/**
+	 * @param expression String initialise to null.
+	 */
+	private String expression = "";
+	/**
+	 * @param answer float
+	 */
+	private float answer;
+	/**
+	 * @param answerString String
+	 */
+	private String answerString;
+	/**
+	 * @param isInfix boolean
+	 */
+	private boolean isInfix = true;
+	/**
+	 * @param rdbtnReversePolish JRadioButton
+	 */
+	private JRadioButton rdbtnReversePolish;
+	/**
+	 * @param rdbtnNewRadioButton JRadioButton
+	 */
+	private JRadioButton rdbtnNewRadioButton;
 
 	/**
 	 * Create the application.
@@ -34,17 +50,23 @@ public class CalcView {
 	public CalcView() {
 		initialize();
 	}
-
+	/**
+	 * This method will return the expression of string.
+	 * @return	String
+	 */
 	public final String getExpression() {
 		return expression;
 	}
-
-	public final void setAnswer(String str) {
+	/**
+	 * This method will set the answer.
+	 * @param str String
+	 */
+	public final void setAnswer(final String str) {
 		answerString = str;
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -56,7 +78,7 @@ public class CalcView {
 		rdbtnNewRadioButton = new JRadioButton("Infix");
 		rdbtnNewRadioButton.setSelected(true);
 		rdbtnNewRadioButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				isInfix = true;
 				rdbtnReversePolish.setSelected(false);
 				if (!rdbtnNewRadioButton.isSelected()) {
@@ -70,7 +92,7 @@ public class CalcView {
 
 		rdbtnReversePolish = new JRadioButton("Reverse Polish");
 		rdbtnReversePolish.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				isInfix = false;
 				rdbtnNewRadioButton.setSelected(false);
 				if (!rdbtnReversePolish.isSelected()) {
@@ -105,7 +127,7 @@ public class CalcView {
 
 		JButton button = new JButton("1");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "1";
 				textPane.setText(expression);
@@ -114,177 +136,177 @@ public class CalcView {
 		button.setBounds(21, 186, 115, 29);
 		frame.getContentPane().add(button);
 
-		JButton button_1 = new JButton("2");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button1 = new JButton("2");
+		button1.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "2";
 				textPane.setText(expression);
 			}
 		});
-		button_1.setBounds(151, 186, 115, 29);
-		frame.getContentPane().add(button_1);
+		button1.setBounds(151, 186, 115, 29);
+		frame.getContentPane().add(button1);
 
-		JButton button_2 = new JButton("3");
-		button_2.addActionListener(new ActionListener() {
+		JButton button2 = new JButton("3");
+		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "3";
 				textPane.setText(expression);
 			}
 		});
-		button_2.setBounds(281, 186, 115, 29);
-		frame.getContentPane().add(button_2);
+		button2.setBounds(281, 186, 115, 29);
+		frame.getContentPane().add(button2);
 
-		JButton button_3 = new JButton("4");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button3 = new JButton("4");
+		button3.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "4";
 				textPane.setText(expression);
 			}
 		});
-		button_3.setBounds(21, 231, 115, 29);
-		frame.getContentPane().add(button_3);
+		button3.setBounds(21, 231, 115, 29);
+		frame.getContentPane().add(button3);
 
-		JButton button_4 = new JButton("5");
-		button_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button4 = new JButton("5");
+		button4.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "5";
 				textPane.setText(expression);
 			}
 		});
-		button_4.setBounds(151, 231, 115, 29);
-		frame.getContentPane().add(button_4);
+		button4.setBounds(151, 231, 115, 29);
+		frame.getContentPane().add(button4);
 
-		JButton button_5 = new JButton("6");
-		button_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button5 = new JButton("6");
+		button5.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "6";
 				textPane.setText(expression);
 			}
 		});
-		button_5.setBounds(281, 231, 115, 29);
-		frame.getContentPane().add(button_5);
+		button5.setBounds(281, 231, 115, 29);
+		frame.getContentPane().add(button5);
 
-		JButton button_6 = new JButton("7");
-		button_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button6 = new JButton("7");
+		button6.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "7";
 				textPane.setText(expression);
 			}
 		});
-		button_6.setBounds(21, 277, 115, 29);
-		frame.getContentPane().add(button_6);
+		button6.setBounds(21, 277, 115, 29);
+		frame.getContentPane().add(button6);
 
-		JButton button_7 = new JButton("8");
-		button_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button7 = new JButton("8");
+		button7.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "8";
 				textPane.setText(expression);
 			}
 		});
-		button_7.setBounds(151, 277, 115, 29);
-		frame.getContentPane().add(button_7);
+		button7.setBounds(151, 277, 115, 29);
+		frame.getContentPane().add(button7);
 
-		JButton button_8 = new JButton("9");
-		button_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button8 = new JButton("9");
+		button8.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "9";
 				textPane.setText(expression);
 			}
 		});
-		button_8.setBounds(281, 276, 115, 29);
-		frame.getContentPane().add(button_8);
+		button8.setBounds(281, 276, 115, 29);
+		frame.getContentPane().add(button8);
 
-		JButton button_9 = new JButton("0");
-		button_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button9 = new JButton("0");
+		button9.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "0";
 				textPane.setText(expression);
 			}
 		});
-		button_9.setBounds(151, 322, 115, 29);
-		frame.getContentPane().add(button_9);
+		button9.setBounds(151, 322, 115, 29);
+		frame.getContentPane().add(button9);
 
-		JButton button_s = new JButton("SPACE");
-		button_s.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton buttonSpace = new JButton("SPACE");
+		buttonSpace.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + " ";
 				textPane.setText(expression);
 			}
 		});
-		button_s.setBounds(21, 322, 115, 29);
-		frame.getContentPane().add(button_s);
+		buttonSpace.setBounds(21, 322, 115, 29);
+		frame.getContentPane().add(buttonSpace);
 
-		JButton button_10 = new JButton(".");
-		button_10.addActionListener(new ActionListener() {
+		JButton button10 = new JButton(".");
+		button10.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + ".";
 				textPane.setText(expression);
 			}
 		});
-		button_10.setBounds(281, 322, 115, 29);
-		frame.getContentPane().add(button_10);
+		button10.setBounds(281, 322, 115, 29);
+		frame.getContentPane().add(button10);
 
-		JButton button_11 = new JButton("+");
-		button_11.addActionListener(new ActionListener() {
+		JButton button11 = new JButton("+");
+		button11.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "+";
 				textPane.setText(expression);
 			}
 		});
-		button_11.setBounds(411, 186, 115, 29);
-		frame.getContentPane().add(button_11);
+		button11.setBounds(411, 186, 115, 29);
+		frame.getContentPane().add(button11);
 
-		JButton button_12 = new JButton("-");
-		button_12.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button12 = new JButton("-");
+		button12.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "-";
 				textPane.setText(expression);
 			}
 		});
-		button_12.setBounds(411, 231, 115, 29);
-		frame.getContentPane().add(button_12);
+		button12.setBounds(411, 231, 115, 29);
+		frame.getContentPane().add(button12);
 
-		JButton button_13 = new JButton("*");
-		button_13.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button13 = new JButton("*");
+		button13.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "*";
 				textPane.setText(expression);
 			}
 		});
-		button_13.setBounds(411, 277, 115, 29);
-		frame.getContentPane().add(button_13);
+		button13.setBounds(411, 277, 115, 29);
+		frame.getContentPane().add(button13);
 
-		JButton button_14 = new JButton("/");
-		button_14.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button14 = new JButton("/");
+		button14.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				expression = expression + "/";
 				textPane.setText(expression);
 			}
 		});
-		button_14.setBounds(411, 322, 115, 29);
-		frame.getContentPane().add(button_14);
+		button14.setBounds(411, 322, 115, 29);
+		frame.getContentPane().add(button14);
 
-		JButton button_15 = new JButton("=");
-		button_15.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton button15 = new JButton("=");
+		button15.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				expression = textPane.getText();
 				textPane.setText(expression);
-				if(expression.matches("[0-9+-[*][/][(][)][.][ ]]+")) {
+				if (expression.matches("[0-9+-[*][/][(][)][.][ ]]+")) {
 					if (isInfix) {
 						try {
 							StandardCalc stdCal = new StandardCalc();
@@ -302,8 +324,8 @@ public class CalcView {
 						}
 						answerString = Float.toString(answer);
 					}
-				}
-				else{
+				
+				} else {
 					JOptionPane.showMessageDialog(null, "Invalid Input");
 				}
 				answerPane.setText(answerString);
@@ -311,7 +333,7 @@ public class CalcView {
 				textPane.setText(expression);
 			}
 		});
-		button_15.setBounds(217, 399, 115, 29);
-		frame.getContentPane().add(button_15);
+		button15.setBounds(217, 399, 115, 29);
+		frame.getContentPane().add(button15);
 	}
 }
