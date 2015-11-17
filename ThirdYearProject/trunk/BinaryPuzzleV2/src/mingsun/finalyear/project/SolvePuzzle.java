@@ -32,37 +32,40 @@ public class SolvePuzzle {
 	}
 	
 	public boolean checkPartialResult(){
+		System.out.println("Enter checking");
+		//Check every row, if the number of 0 or 1 is more than it should be.
 		for(int row=0; row<gameSize; row++) {
 			System.out.println("herererer");
 			int countZero = 0, countOne = 0;
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize; numberIndex++) {
 				if(numberButtonList.getNumberButton(numberIndex).getValue()==0) {
 					countZero = countZero + 1;
-				} else if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
+				} 
+				if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
 					countOne = countOne + 1;
-				} else {
-					return false;
 				}
 			}
 			if(countZero>gameSize/2 || countOne>gameSize/2){
 				return false;
 			}
 		}
+		System.out.println("Pass the row check");
+		//Check every column, if the number of 0 or 1 is more than it should be.
 		for(int col=0; col<gameSize; col++) {
 			int countZero = 0, countOne = 0;
 			for(int numberIndex=col; numberIndex <= col+gameSize*(gameSize-1); numberIndex = numberIndex + gameSize) {
 				if(numberButtonList.getNumberButton(numberIndex).getValue()==0) {
 					countZero = countZero + 1;
-				} else if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
-					countOne = countOne + 1;
-				} else {
-					return false;
 				}
+				if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
+					countOne = countOne + 1;
+				} 
 			}
 			if(countZero>gameSize/2 || countOne>gameSize/2) {
 				return false;
 			}
 		}
+		System.out.println("Pass the column check");
 		for(int row=0; row<gameSize; row++) {
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize-2; numberIndex++) {
 				int value1 = numberButtonList.getNumberButton(numberIndex).getValue();
