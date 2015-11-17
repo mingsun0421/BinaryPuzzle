@@ -247,11 +247,7 @@ public class Game extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			solver = new SolvePuzzle(nbList,size);
-			while(true){
-				if(solver.solveIt(0, 0)){
-					break;
-				}
-			}
+			solver.solverIt();
 		}
 	}
 }

@@ -3,12 +3,17 @@ package mingsun.finalyear.project;
 public class SolvePuzzle {
 	private NumberButtonList numberButtonList;
 	private int gameSize;
+	private int index;
+	private int value;
 	
 	public SolvePuzzle(NumberButtonList numberButtonList, int gameSize) {
 		this.numberButtonList = numberButtonList;
 		this.gameSize = gameSize;
+		this.index = 0;
+		this.value = 1;
 	}
 	
+	/**
 	public boolean solveIt(int index, int value) {
 		if(index == gameSize*gameSize){
 			return true;
@@ -30,12 +35,30 @@ public class SolvePuzzle {
 			return solveIt(index,0);
 		}
 	}
-	
+	**/
+	public void solverIt() {
+		while(index < gameSize*gameSize){
+			numberButtonList.getNumberButton(index).setIcon();
+			System.out.println("LOOP.. INDEX "+index);
+			if(numberButtonList.getNumberButton(index).getValue() == 2){
+				numberButtonList.getNumberButton(index).setValue(value);
+				if(checkPartialResult()){
+					index = index + 1;
+				} else {
+					if(index!=0){
+						index = index -1;
+						value = Math.abs(value - 1);
+					}
+				}
+			} else {
+				index = index + 1;
+			}
+		}
+	}
 	public boolean checkPartialResult(){
 		System.out.println("Enter checking");
 		//Check every row, if the number of 0 or 1 is more than it should be.
 		for(int row=0; row<gameSize; row++) {
-			System.out.println("herererer");
 			int countZero = 0, countOne = 0;
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize; numberIndex++) {
 				if(numberButtonList.getNumberButton(numberIndex).getValue()==0) {
@@ -49,7 +72,6 @@ public class SolvePuzzle {
 				return false;
 			}
 		}
-		System.out.println("Pass the row check");
 		//Check every column, if the number of 0 or 1 is more than it should be.
 		for(int col=0; col<gameSize; col++) {
 			int countZero = 0, countOne = 0;
@@ -65,7 +87,6 @@ public class SolvePuzzle {
 				return false;
 			}
 		}
-		System.out.println("Pass the column check");
 		for(int row=0; row<gameSize; row++) {
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize-2; numberIndex++) {
 				int value1 = numberButtonList.getNumberButton(numberIndex).getValue();
@@ -87,6 +108,7 @@ public class SolvePuzzle {
 				}
 			}
 		}
+		System.out.println("CHECKING SECCUESS");
 		return true;
 	}
 	
