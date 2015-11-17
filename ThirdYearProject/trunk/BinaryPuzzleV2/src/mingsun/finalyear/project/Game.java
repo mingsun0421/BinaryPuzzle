@@ -113,6 +113,7 @@ public class Game extends JFrame{
 			panel.add(numberButton);
 		}
 		JButton solveButton = new JButton("SOLVE");
+		solveButton.setIcon(new ImageIcon("./resource/button_ok.png"));
 		solveButton.addActionListener(new SolveListener(nbList,4));
 		panel.add(solveButton);
 		add(panel);
@@ -132,13 +133,17 @@ public class Game extends JFrame{
 		}
 		checkResultButton = new JButton("CEHCK");
 		panel.add(checkResultButton);
+		checkResultButton.setIcon(new ImageIcon("./resource/button_black_play.png"));
 		checkResultButton.addActionListener(new CheckListener(gridSize,nbList));
 		JButton restartButton = new JButton("RESTART");
+		restartButton.setIcon(new ImageIcon("./resource/button_black_repeat.png"));
 		restartButton.addActionListener(new ReStartListener(nbList));
 		panel.add(restartButton);
 		JButton hintButton = new JButton("HINT");
+		hintButton.setIcon(new ImageIcon("./resource/tips.png"));
 		panel.add(hintButton);
 		nextLevelButton = new JButton("NEXT");
+		nextLevelButton.setIcon(new ImageIcon("./resource/button_black_last.png"));
 		nextLevelButton.addActionListener(new NextButtonListener(4));
 		panel.add(nextLevelButton);
 		add(panel);

@@ -15,7 +15,7 @@ public class NumberButton extends JButton implements ActionListener{
 	
 	public NumberButton(int ID) {
 		this.ID = ID;
-		One = new ImageIcon("./resource/OneIcon.png");
+		One = new ImageIcon("./resource/numbers14.png");
 		Zero = new ImageIcon("./resource/ZeroIcon.png");
 		this.addActionListener(this);
 	}
