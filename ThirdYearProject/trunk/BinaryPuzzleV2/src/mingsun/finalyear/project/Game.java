@@ -3,6 +3,7 @@ package mingsun.finalyear.project;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -114,6 +115,7 @@ public class Game extends JFrame{
 		}
 		JButton solveButton = new JButton("SOLVE");
 		solveButton.setIcon(new ImageIcon("./resource/button_ok.png"));
+		solveButton.setBackground(Color.WHITE);
 		solveButton.addActionListener(new SolveListener(nbList,4));
 		panel.add(solveButton);
 		add(panel);
@@ -134,16 +136,20 @@ public class Game extends JFrame{
 		checkResultButton = new JButton();
 		panel.add(checkResultButton);
 		checkResultButton.setIcon(new ImageIcon("./resource/start.png"));
+		checkResultButton.setBackground(Color.WHITE);
 		checkResultButton.addActionListener(new CheckListener(gridSize,nbList));
 		JButton restartButton = new JButton();
 		restartButton.setIcon(new ImageIcon("./resource/restart.png"));
+		restartButton.setBackground(Color.WHITE);
 		restartButton.addActionListener(new ReStartListener(nbList));
 		panel.add(restartButton);
 		JButton hintButton = new JButton();
 		hintButton.setIcon(new ImageIcon("./resource/hint.png"));
+		hintButton.setBackground(Color.WHITE);
 		panel.add(hintButton);
 		nextLevelButton = new JButton();
 		nextLevelButton.setIcon(new ImageIcon("./resource/next.png"));
+		nextLevelButton.setBackground(Color.WHITE);
 		nextLevelButton.addActionListener(new NextButtonListener(4));
 		panel.add(nextLevelButton);
 		add(panel);

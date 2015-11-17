@@ -1,5 +1,6 @@
 package mingsun.finalyear.project;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +15,7 @@ public class NumberButton extends JButton implements ActionListener{
 	private boolean editable = true;
 	
 	public NumberButton(int ID) {
+		setBackground(Color.white);
 		this.ID = ID;
 		One = new ImageIcon("./resource/number1.png");
 		Zero = new ImageIcon("./resource/number0.png");
