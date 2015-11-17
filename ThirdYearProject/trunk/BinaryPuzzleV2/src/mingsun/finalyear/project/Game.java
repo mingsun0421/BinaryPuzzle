@@ -131,19 +131,19 @@ public class Game extends JFrame{
 			NumberButton numberButton = nbList.getNumberButton(i);
 			panel.add(numberButton);
 		}
-		checkResultButton = new JButton("CEHCK");
+		checkResultButton = new JButton();
 		panel.add(checkResultButton);
-		checkResultButton.setIcon(new ImageIcon("./resource/button_black_play.png"));
+		checkResultButton.setIcon(new ImageIcon("./resource/start.png"));
 		checkResultButton.addActionListener(new CheckListener(gridSize,nbList));
-		JButton restartButton = new JButton("RESTART");
-		restartButton.setIcon(new ImageIcon("./resource/button_black_repeat.png"));
+		JButton restartButton = new JButton();
+		restartButton.setIcon(new ImageIcon("./resource/restart.png"));
 		restartButton.addActionListener(new ReStartListener(nbList));
 		panel.add(restartButton);
-		JButton hintButton = new JButton("HINT");
-		hintButton.setIcon(new ImageIcon("./resource/tips.png"));
+		JButton hintButton = new JButton();
+		hintButton.setIcon(new ImageIcon("./resource/hint.png"));
 		panel.add(hintButton);
-		nextLevelButton = new JButton("NEXT");
-		nextLevelButton.setIcon(new ImageIcon("./resource/button_black_last.png"));
+		nextLevelButton = new JButton();
+		nextLevelButton.setIcon(new ImageIcon("./resource/next.png"));
 		nextLevelButton.addActionListener(new NextButtonListener(4));
 		panel.add(nextLevelButton);
 		add(panel);
