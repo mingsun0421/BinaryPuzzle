@@ -131,8 +131,10 @@ public class Game extends JFrame{
 		panel.setLayout(new GridLayout(size+1,size));
 		for(int i=0; i<size*size; i++) {
 			NumberButton numberButton = nbList.getNumberButton(i);
+			numberButton.setIcon();
 			panel.add(numberButton);
 		}
+		
 		checkResultButton = new JButton();
 		panel.add(checkResultButton);
 		checkResultButton.setIcon(new ImageIcon("./resource/start.png"));
