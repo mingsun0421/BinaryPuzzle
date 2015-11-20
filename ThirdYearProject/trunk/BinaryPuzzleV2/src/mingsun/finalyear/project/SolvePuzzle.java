@@ -46,6 +46,7 @@ public class SolvePuzzle {
 					index = index + 1;
 				} else {
 					if(index!=0){
+						numberButtonList.getNumberButton(index).setValue(2);
 						index = index -1;
 						value = Math.abs(value - 1);
 					}
