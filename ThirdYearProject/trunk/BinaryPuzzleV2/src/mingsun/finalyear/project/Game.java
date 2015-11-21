@@ -21,11 +21,12 @@ import javax.swing.JOptionPane;
 public class Game extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JMenu gameMenu, moreOptions;
-	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEitghS, checkButton, solveButton;
+	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, checkButton, solveButton;
 	private JPanel panel = new JPanel();
 	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
 	public JButton checkResultButton, nextLevelButton;
+	private int level = 1;
 	
 	public static void main(String args[]) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -79,19 +80,25 @@ public class Game extends JFrame{
 		sixSix = new JMenuItem("6X6");
 		sixSixS = new JMenuItem("6X6");
 		eightEight = new JMenuItem("8X8");
+		eightEightS = new JMenuItem("8X8");
+		
 		soloMode.add(fourFour);
 		//SOLVE
 		solveMode.add(fourFourS);
 		fourFourS.addActionListener(new GameSizeListener(4));
-		fourFour.addActionListener(new GamePlayListener(4));
+		fourFour.addActionListener(new GamePlayListener(4,1));
+		
 		soloMode.add(sixSix);
 		//SOLVE
 		solveMode.add(sixSixS);
-		sixSix.addActionListener(new GamePlayListener(6));
+		sixSixS.addActionListener(new GameSizeListener(6));
+		sixSix.addActionListener(new GamePlayListener(6,1));
+		
 		soloMode.add(eightEight);
 		//SOLVE
-		//solveMode.add(eightEight);
-		eightEight.addActionListener(new GamePlayListener(8));
+		solveMode.add(eightEightS);
+		eightEight.addActionListener(new GamePlayListener(8,1));
+		eightEightS.addActionListener(new GameSizeListener(8));
 		
 		solveButton = new JMenuItem("solve it");
 		checkButton = new JMenuItem("check it");
@@ -153,10 +160,18 @@ public class Game extends JFrame{
 		nextLevelButton = new JButton();
 		nextLevelButton.setIcon(new ImageIcon("./resource/next.png"));
 		nextLevelButton.setBackground(Color.WHITE);
-		nextLevelButton.addActionListener(new NextButtonListener(size));
+		nextLevelButton.addActionListener(new NextButtonListener(size,level++));
 		panel.add(nextLevelButton);
 		add(panel);
 		setVisible(true);
+	}
+	
+	public void levelPlus() {
+		level = level + 1;
+	}
+	
+	public void levelReset() {
+		level = 1;
 	}
 	
 	private class GameSizeListener implements ActionListener {
@@ -173,13 +188,16 @@ public class Game extends JFrame{
 	
 	private class GamePlayListener implements ActionListener {
 		private int size;
-		public GamePlayListener(int size) {
+		private int level;
+		public GamePlayListener(int size, int level) {
+			this.level = level;
 			this.size = size;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String fileName = "./resource/"+size+"x"+size+"Puzzle1.txt";
+			levelReset();
+			String fileName = "./resource/"+size+"x"+size+"Puzzle"+level+".txt";
 			ReadPuzzleTxt rpt = new ReadPuzzleTxt(fileName,size);
 			NumberButtonList newNbList = null;
 			try {
@@ -194,13 +212,18 @@ public class Game extends JFrame{
 	
 	private class NextButtonListener implements ActionListener {
 		private int size;
-		public NextButtonListener(int size) {
+		private int level;
+		public NextButtonListener(int size, int level) {
+			this.level = level;
 			this.size = size;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			ReadPuzzleTxt rpt = new ReadPuzzleTxt("./resource/4x4Puzzle2.txt",size);
+			level = level + 1;
+			levelPlus();
+			String fileName = "./resource/"+size+"x"+size+"Puzzle"+level+".txt";
+			ReadPuzzleTxt rpt = new ReadPuzzleTxt(fileName,size);
 			NumberButtonList newNbList = null;
 			try {
 				newNbList = rpt.getList();
