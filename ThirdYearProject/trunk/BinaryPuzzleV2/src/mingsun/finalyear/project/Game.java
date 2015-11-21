@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class Game extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JMenu gameMenu, moreOptions;
-	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, eightEight, checkButton, solveButton;
+	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEitghS, checkButton, solveButton;
 	private JPanel panel = new JPanel();
 	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
@@ -77,6 +77,7 @@ public class Game extends JFrame{
 		fourFour = new JMenuItem("4X4");
 		fourFourS = new JMenuItem("4X4");
 		sixSix = new JMenuItem("6X6");
+		sixSixS = new JMenuItem("6X6");
 		eightEight = new JMenuItem("8X8");
 		soloMode.add(fourFour);
 		//SOLVE
@@ -85,12 +86,12 @@ public class Game extends JFrame{
 		fourFour.addActionListener(new GamePlayListener(4));
 		soloMode.add(sixSix);
 		//SOLVE
-		//solveMode.add(sixSix);
-		sixSix.addActionListener(new GameSizeListener(6));
+		solveMode.add(sixSixS);
+		sixSix.addActionListener(new GamePlayListener(6));
 		soloMode.add(eightEight);
 		//SOLVE
 		//solveMode.add(eightEight);
-		eightEight.addActionListener(new GameSizeListener(8));
+		eightEight.addActionListener(new GamePlayListener(8));
 		
 		solveButton = new JMenuItem("solve it");
 		checkButton = new JMenuItem("check it");
@@ -152,7 +153,7 @@ public class Game extends JFrame{
 		nextLevelButton = new JButton();
 		nextLevelButton.setIcon(new ImageIcon("./resource/next.png"));
 		nextLevelButton.setBackground(Color.WHITE);
-		nextLevelButton.addActionListener(new NextButtonListener(4));
+		nextLevelButton.addActionListener(new NextButtonListener(size));
 		panel.add(nextLevelButton);
 		add(panel);
 		setVisible(true);
@@ -178,7 +179,8 @@ public class Game extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			ReadPuzzleTxt rpt = new ReadPuzzleTxt("./resource/4x4Puzzle1.txt",size);
+			String fileName = "./resource/"+size+"x"+size+"Puzzle1.txt";
+			ReadPuzzleTxt rpt = new ReadPuzzleTxt(fileName,size);
 			NumberButtonList newNbList = null;
 			try {
 				newNbList = rpt.getList();

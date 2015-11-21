@@ -20,4 +20,9 @@ public class NumberButtonList {
 	public int getSize(){
 		return list.size();
 	}
+	public void setAllIcon() {
+		for(NumberButton nb : list) {
+			nb.setIcon();
+		}
+	}
 }

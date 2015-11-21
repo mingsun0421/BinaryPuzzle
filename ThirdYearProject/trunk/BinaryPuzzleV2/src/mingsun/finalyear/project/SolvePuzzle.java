@@ -55,6 +55,7 @@ public class SolvePuzzle {
 				index = index + 1;
 			}
 		}
+		numberButtonList.setAllIcon();
 	}
 	public boolean checkPartialResult(){
 		System.out.println("Enter checking");
