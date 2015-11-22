@@ -1,5 +1,7 @@
 package mingsun.finalyear.project;
 
+import java.util.ArrayList;
+
 public class SolvePuzzle {
 	private NumberButtonList numberButtonList;
 	private int gameSize;
@@ -37,18 +39,26 @@ public class SolvePuzzle {
 	}
 	**/
 	public void solverIt() {
+		ArrayList<Integer> marked = new ArrayList<Integer>();
+		int markedIndex = 0;
 		while(index < gameSize*gameSize){
 			numberButtonList.getNumberButton(index).setIcon();
 			System.out.println("LOOP.. INDEX "+index);
 			if(numberButtonList.getNumberButton(index).getValue() == 2){
+				marked.add(index);
+				markedIndex = markedIndex + 1;
 				numberButtonList.getNumberButton(index).setValue(value);
 				if(checkPartialResult()){
 					index = index + 1;
 				} else {
-					if(index!=0){
+					if(markedIndex!=0 && index!=0){
 						numberButtonList.getNumberButton(index).setValue(2);
-						index = index -1;
+						markedIndex = markedIndex - 1;
+						index = marked.get(markedIndex);
 						value = Math.abs(value - 1);
+					} else {
+						index = marked.get(0);
+						markedIndex = 0;
 					}
 				}
 			} else {
@@ -94,8 +104,10 @@ public class SolvePuzzle {
 				int value1 = numberButtonList.getNumberButton(numberIndex).getValue();
 				int value2 = numberButtonList.getNumberButton(numberIndex+1).getValue();
 				int value3 = numberButtonList.getNumberButton(numberIndex+2).getValue();
-				if(value1 == value2 && value2 == value3) {
-					return false;
+				if(value2 != 2 && value3 != 2){
+					if(value1 == value2 && value2 == value3) {
+						return false;
+					}
 				}
 			}
 		}
@@ -105,8 +117,10 @@ public class SolvePuzzle {
 				int value1 = numberButtonList.getNumberButton(numberIndex).getValue();
 				int value2 = numberButtonList.getNumberButton(numberIndex+gameSize).getValue();
 				int value3 = numberButtonList.getNumberButton(numberIndex+gameSize+gameSize).getValue();
-				if(value1 == value2 && value2 == value3) {
-					return false;
+				if(value2 != 2 && value3 != 2){
+					if(value1 == value2 && value2 == value3) {
+						return false;
+					}
 				}
 			}
 		}
