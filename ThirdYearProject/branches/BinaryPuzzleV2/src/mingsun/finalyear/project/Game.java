@@ -22,7 +22,7 @@ public class Game extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenu gameMenu, moreOptions;
 	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, checkButton,
-			solveButton;
+			solveButton, printButton;
 	private JPanel panel = new JPanel();
 	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
@@ -104,8 +104,16 @@ public class Game extends JFrame {
 		// checkMenu.add(checkButton);
 		// checkButton.addActionListener(new CheckListener(gridSize,nbList));
 		// End JMenuBar
+		//JMenuItem for print
+		printButton = new JMenuItem("print grid");
+		moreOptions.add(printButton);
+		
 		add(panel);
 		setVisible(true);
+	}
+	
+	public void setNbList(NumberButtonList list) {
+		nbList = list;
 	}
 
 	public void buildInterface(int size) {
@@ -123,6 +131,8 @@ public class Game extends JFrame {
 		solveButton.setIcon(new ImageIcon("./resource/button_ok.png"));
 		solveButton.setBackground(Color.WHITE);
 		solveButton.addActionListener(new SolveListener(nbList, gridSize));
+		//Add print button listener here
+		printButton.addActionListener(new PrintButtonListener(nbList,gridSize));
 		panel.add(solveButton);
 		add(panel);
 		setVisible(true);
@@ -140,7 +150,7 @@ public class Game extends JFrame {
 			numberButton.setIcon();
 			panel.add(numberButton);
 		}
-
+		setNbList(nbList);
 		checkResultButton = new JButton();
 		panel.add(checkResultButton);
 		checkResultButton.setIcon(new ImageIcon("./resource/start.png"));
@@ -160,6 +170,8 @@ public class Game extends JFrame {
 		nextLevelButton.setBackground(Color.WHITE);
 		nextLevelButton.addActionListener(new NextButtonListener(size, level++));
 		panel.add(nextLevelButton);
+		//Add print button listener here
+		printButton.addActionListener(new PrintButtonListener(nbList,gridSize));
 		add(panel);
 		setVisible(true);
 	}
@@ -302,6 +314,23 @@ public class Game extends JFrame {
 			// TODO Auto-generated method stub
 			solver = new SolvePuzzle(nbList, size);
 			solver.solverIt();
+		}
+	}
+	
+	private class PrintButtonListener implements ActionListener {
+		private int size;
+		private NumberButtonList nbList;
+
+		public PrintButtonListener(NumberButtonList nbList, int size) {
+			this.nbList = nbList;
+			this.size = size;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			OutPutTxt opt = new OutPutTxt(nbList,size);
+			opt.output();
 		}
 	}
 }
