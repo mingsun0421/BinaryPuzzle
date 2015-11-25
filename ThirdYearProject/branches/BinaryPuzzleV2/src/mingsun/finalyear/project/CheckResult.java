@@ -9,7 +9,7 @@ public class CheckResult {
 		this.gameSize = gameSize;
 	}
 	
-	public Boolean checkEquality(){
+	public boolean checkEquality(){
 		//check each row's number of 1 and 0
 		System.out.println("GameSize: "+gameSize);
 		for(int row=0; row<gameSize; row++) {
@@ -48,7 +48,7 @@ public class CheckResult {
 		return true;
 	}
 	
-	public Boolean checkNeighbours(){
+	public boolean checkNeighbours(){
 		//Check every horizontal neighbours
 		for(int row=0; row<gameSize; row++) {
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize-2; numberIndex++) {
@@ -74,7 +74,7 @@ public class CheckResult {
 		return true;
 	}
 	
-	public Boolean checkUniqueness() {
+	public boolean checkUniqueness() {
 		String[] rowOrder = new String[gameSize];
 		String[] columnOrder = new String[gameSize];
 		//Check every rows
