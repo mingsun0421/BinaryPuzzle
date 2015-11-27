@@ -17,18 +17,44 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
+/**
+ * This is main class for this project.
+ * It implements interface with listeners and call other classes.
+ * @author Ming Sun
+ *
+ */
 public class Game extends JFrame {
+	/**
+	 * @param gameMenu The menu bar on the top of the screen.
+	 * @param moreOptions The menu bar on the top of the screen.
+	 * @param soloMode Menu item of gameMenu menu bar.
+	 * @param solveMode Menu item of gameMenu menu bar.
+	 * @param fourFour Menu sub item of soloMode menu item.
+	 * @param FourFourS Menu sub item of solveMode menu item.
+	 * @param sixSix Menu sub item of soloMode menu item.
+	 * @param sixSixS Menu sub item of solveMode menu item.
+	 * @param eightEight Menu sub item of soloMode menu item.
+	 * @param eightEightS Menu sub item of solveMode menu item.
+	 * @param printButton Menu item of moreOption menu bar.
+	 * @param panel JPanel.
+	 * @param nbList NumberButtonList, list of all numbers in grids include empty.
+	 * @param gridSize integer size of the grid.
+	 * @param checkResultButton JButton for check grid.
+	 * @param nextLevelButton JButton for next level.
+	 * @param level integer indicates level of player is playing. 
+	 */
 	private static final long serialVersionUID = 1L;
 	private JMenu gameMenu, moreOptions;
-	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, checkButton,
-			solveButton, printButton;
+	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, printButton;
 	private JPanel panel = new JPanel();
 	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
 	public JButton checkResultButton, nextLevelButton;
 	private int level = 1;
-
+	/**
+	 * Main method. If invokeLater is called from the event dispatching thread.
+	 * @param args arguments.
+	 */
 	public static void main(String args[]) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -38,7 +64,9 @@ public class Game extends JFrame {
 			}
 		});
 	}
-
+	/**
+	 * Constructor to initialise interface and all related components. 
+	 */
 	public Game() {
 		super("Binary Puzzle");
 		ImageIcon logo = new ImageIcon("./resource/Icon_Sudoku_212.png");
@@ -98,8 +126,8 @@ public class Game extends JFrame {
 		eightEight.addActionListener(new GamePlayListener(8, 1));
 		eightEightS.addActionListener(new GameSizeListener(8));
 
-		solveButton = new JMenuItem("solve it");
-		checkButton = new JMenuItem("check it");
+		new JMenuItem("solve it");
+		new JMenuItem("check it");
 		// checkMenu.add(solveButton);
 		// checkMenu.add(checkButton);
 		// checkButton.addActionListener(new CheckListener(gridSize,nbList));
@@ -111,11 +139,17 @@ public class Game extends JFrame {
 		add(panel);
 		setVisible(true);
 	}
-	
+	/**
+	 * Method to set list to current list.
+	 * @param list NumberButtonList stores all grid items.
+	 */
 	public void setNbList(NumberButtonList list) {
 		nbList = list;
 	}
-
+	/**
+	 * 
+	 * @param size
+	 */
 	public void buildInterface(int size) {
 		// TODO gridSize cannot update
 		gridSize = size;
