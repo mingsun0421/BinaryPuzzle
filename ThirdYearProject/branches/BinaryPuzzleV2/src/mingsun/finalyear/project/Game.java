@@ -127,7 +127,7 @@ public class Game extends JFrame {
 			nbList.add(numberButton);
 			panel.add(numberButton);
 		}
-		JButton solveButton = new JButton("SOLVE");
+		JButton solveButton = new JButton("");
 		solveButton.setIcon(new ImageIcon("./resource/button_ok.png"));
 		solveButton.setBackground(Color.WHITE);
 		solveButton.addActionListener(new SolveListener(nbList, gridSize));
