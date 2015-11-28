@@ -6,7 +6,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * the class designed to represent one single number button which is clickable, 
+ * for each click it change its value and icon from 0 to 1 to empty.
+ * @author Ming Sun
+ *
+ */
 public class NumberButton extends JButton implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private ImageIcon One, Zero, OneU, ZeroU;

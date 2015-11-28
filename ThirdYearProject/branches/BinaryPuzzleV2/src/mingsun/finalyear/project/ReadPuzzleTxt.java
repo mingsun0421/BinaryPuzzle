@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
+/**
+ * the class is designed to support save grid option.
+ * @author Ming Sun
+ *
+ */
 public class ReadPuzzleTxt {
 	private NumberButtonList nbList;
 	private String fileName;

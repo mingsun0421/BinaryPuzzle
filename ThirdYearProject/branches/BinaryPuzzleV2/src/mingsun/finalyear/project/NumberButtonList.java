@@ -1,7 +1,11 @@
 package mingsun.finalyear.project;
 
 import java.util.ArrayList;
-
+/**
+ * The class designed to represent list of all single number buttons to form a whole puzzle.
+ * @author Ming Sun
+ *
+ */
 public class NumberButtonList {
 	private ArrayList<NumberButton> list;
 	

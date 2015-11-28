@@ -3,7 +3,11 @@ package mingsun.finalyear.project;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/**
+ * the class is designed to support save grid option.
+ * @author Ming Sun
+ *
+ */
 public class OutPutTxt {
 	private NumberButtonList nbList;
 	private int size;

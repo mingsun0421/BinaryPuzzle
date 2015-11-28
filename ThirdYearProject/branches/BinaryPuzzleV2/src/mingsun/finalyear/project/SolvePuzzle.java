@@ -1,7 +1,11 @@
 package mingsun.finalyear.project;
 
 import java.util.ArrayList;
-
+/**
+ * the class is designed to support solving method which can be applied different size of puzzles.
+ * @author Ming Sun
+ *
+ */
 public class SolvePuzzle {
 	private NumberButtonList numberButtonList;
 	private int gameSize;

@@ -147,8 +147,8 @@ public class Game extends JFrame {
 		nbList = list;
 	}
 	/**
-	 * 
-	 * @param size
+	 * This method builds a empty grid with size it specified in the input.
+	 * @param size Integer value, grid size.
 	 */
 	public void buildInterface(int size) {
 		// TODO gridSize cannot update
@@ -171,7 +171,11 @@ public class Game extends JFrame {
 		add(panel);
 		setVisible(true);
 	}
-
+	/**
+	 * This method builds a filled grid with list items.
+	 * @param size Integer value, grid size.
+	 * @param nbList List of elements of number.
+	 */
 	// build non-empty interface
 	public void buildFilledInterface(int size, NumberButtonList nbList) {
 		// TODO gridSize cannot update
@@ -209,15 +213,23 @@ public class Game extends JFrame {
 		add(panel);
 		setVisible(true);
 	}
-
+	/**
+	 * Level up method.
+	 */
 	public void levelPlus() {
 		level = level + 1;
 	}
-
+	/**
+	 * reset level to 1.
+	 */
 	public void levelReset() {
 		level = 1;
 	}
-
+	/**
+	 * 
+	 * @author Ming Sun
+	 *
+	 */
 	private class GameSizeListener implements ActionListener {
 		private int size;
 
