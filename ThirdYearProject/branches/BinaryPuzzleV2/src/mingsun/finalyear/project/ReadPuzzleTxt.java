@@ -7,19 +7,30 @@ import java.io.IOException;
 /**
  * the class is designed to support save grid option.
  * @author Ming Sun
- *
+ * @param nbList NumberButtonList, list of number buttons.
+ * @param fileName string name of file.
+ * @param size integer, size of grid.
  */
 public class ReadPuzzleTxt {
 	private NumberButtonList nbList;
 	private String fileName;
 	private int size;
-	
+	/**
+	 * Constructor.
+	 * @param fileName String
+	 * @param size integer
+	 */
 	public ReadPuzzleTxt(String fileName, int size) {
 		this.fileName = fileName;
 		this.size = size;
 		nbList = new NumberButtonList();
 	}
-	
+	/**
+	 * This method can read txt and return a number button list of all content in that file.
+	 * @return NumberButtonList, list of number buttons.
+	 * @throws FileNotFoundException Exception
+	 * @throws IOException Exception
+	 */
 	public NumberButtonList getList() throws FileNotFoundException, IOException{
 		int index = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {

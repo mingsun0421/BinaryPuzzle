@@ -6,17 +6,24 @@ import java.io.IOException;
 /**
  * the class is designed to support save grid option.
  * @author Ming Sun
- *
+ * @param nbList NumberButtonList list of number buttons.
+ * @param size integer, size of puzzle.
  */
 public class OutPutTxt {
 	private NumberButtonList nbList;
 	private int size;
-	
+	/**
+	 * Constructor
+	 * @param nbList NumberButtonList list of all number buttons.
+	 * @param size integer, size of puzzle.
+	 */
 	public OutPutTxt(NumberButtonList nbList, int size) {
 		this.nbList = nbList;
 		this.size = size;
 	}
-	
+	/**
+	 * This method will output elements in the list to txt file
+	 */
 	public void output() {
 		try {
 			FileWriter fw = new FileWriter("./output/output.txt");

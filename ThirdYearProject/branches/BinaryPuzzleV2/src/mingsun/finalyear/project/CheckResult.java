@@ -1,14 +1,26 @@
 package mingsun.finalyear.project;
-
+/**
+ * This class is design to implement check method of binary puzzle.
+ * @author Ming
+ * @param numberButtonList NumberButtonList list of all number buttons for 1s and 0s.
+ * @param gameSize Integer, size of grid.
+ */
 public class CheckResult {
 	private NumberButtonList numberButtonList;
 	private int gameSize;
-	
+    /**
+     * Constructor
+     * @param numberButtonList NumberButtonList list of all number buttons for 1s and 0s.
+     * @param gameSize Integer, size of grid.
+     */
 	public CheckResult(NumberButtonList numberButtonList, int gameSize) {
 		this.numberButtonList = numberButtonList;
 		this.gameSize = gameSize;
 	}
-	
+	/**
+	 * Check if there are same amount of 1s and 0s each row & column.
+	 * @return Boolean
+	 */
 	public boolean checkEquality(){
 		//check each row's number of 1 and 0
 		System.out.println("GameSize: "+gameSize);
@@ -47,7 +59,10 @@ public class CheckResult {
 		}
 		return true;
 	}
-	
+	/**
+	 * Check if there are 2 same number for each vertical and horizontal neighbours.
+	 * @return Boolean 
+	 */
 	public boolean checkNeighbours(){
 		//Check every horizontal neighbours
 		for(int row=0; row<gameSize; row++) {
@@ -73,7 +88,10 @@ public class CheckResult {
 		}
 		return true;
 	}
-	
+	/**
+	 * Check of each row or colunm's combinations are the same.
+	 * @return Boolean
+	 */
 	public boolean checkUniqueness() {
 		String[] rowOrder = new String[gameSize];
 		String[] columnOrder = new String[gameSize];

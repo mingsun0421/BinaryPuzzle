@@ -10,6 +10,7 @@ import mingsun.finalyear.project.NumberButton;
  */
 
 /**
+ * This is unit test of NumberButton class
  * @author Ming Sun
  *
  */

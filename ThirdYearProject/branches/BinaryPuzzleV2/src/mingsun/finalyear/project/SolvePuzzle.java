@@ -4,14 +4,21 @@ import java.util.ArrayList;
 /**
  * the class is designed to support solving method which can be applied different size of puzzles.
  * @author Ming Sun
- *
+ * @param numberButtonList list of number buttons.
+ * @param gameSize integer size of grid.
+ * @param index integer index in the list.
+ * @param value integer value to set number.
  */
 public class SolvePuzzle {
 	private NumberButtonList numberButtonList;
 	private int gameSize;
 	private int index;
 	private int value;
-	
+	/**
+	 * Constructor.
+	 * @param numberButtonList list of number buttons
+	 * @param gameSize Size of puzzle grid.
+	 */
 	public SolvePuzzle(NumberButtonList numberButtonList, int gameSize) {
 		this.numberButtonList = numberButtonList;
 		this.gameSize = gameSize;
@@ -42,6 +49,9 @@ public class SolvePuzzle {
 		}
 	}
 	**/
+	/**
+	 * Backtracking solving algorithm.
+	 */
 	public void solverIt() {
 		ArrayList<Integer> marked = new ArrayList<Integer>();
 		int markedIndex = 0;
@@ -71,6 +81,10 @@ public class SolvePuzzle {
 		}
 		numberButtonList.setAllIcon();
 	}
+	/**
+	 * To check if grid follows the rules.
+	 * @return boolean
+	 */
 	public boolean checkPartialResult(){
 		System.out.println("Enter checking");
 		//Check every row, if the number of 0 or 1 is more than it should be.

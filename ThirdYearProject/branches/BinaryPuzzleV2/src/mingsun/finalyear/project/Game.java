@@ -387,7 +387,7 @@ public class Game extends JFrame {
 	/**
 	 * PrintButtonListener takes NumberButtonList as input argument and print the current grid snapshot into a txt file,
 	 * when print grid option is selected. 
-	 * @author GOU
+	 * @author Ming Sun
 	 *
 	 */
 	private class PrintButtonListener implements ActionListener {

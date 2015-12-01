@@ -10,7 +10,13 @@ import javax.swing.JButton;
  * the class designed to represent one single number button which is clickable, 
  * for each click it change its value and icon from 0 to 1 to empty.
  * @author Ming Sun
- *
+ * @param One ImageIcon
+ * @param Zero ImageIcon
+ * @param OneU ImageIcon
+ * @param ZeroU ImageIcon
+ * @param value integer
+ * @param ID integer
+ * @editable Boolean
  */
 public class NumberButton extends JButton implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +24,10 @@ public class NumberButton extends JButton implements ActionListener {
 	private int value = 2;
 	private int ID;
 	private boolean editable = true;
-
+	/**
+	 * Constructor.
+	 * @param ID integer of number index.
+	 */
 	public NumberButton(int ID) {
 		setBackground(Color.white);
 		this.ID = ID;
@@ -28,7 +37,9 @@ public class NumberButton extends JButton implements ActionListener {
 		ZeroU = new ImageIcon("./resource/number0u.png");
 		this.addActionListener(this);
 	}
-
+	/**
+	 * Action performed method to change icon when clicked.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (editable) {
 			value = value + 1;
@@ -49,7 +60,9 @@ public class NumberButton extends JButton implements ActionListener {
 			}
 		}
 	}
-
+	/**
+	 * Reset button's icon.
+	 */
 	public void setIcon() {
 		if (editable) {
 			switch (value) {
@@ -83,23 +96,38 @@ public class NumberButton extends JButton implements ActionListener {
 			}
 		}
 	}
-
+	/**
+	 * Get method to get id.
+	 * @return integer
+	 */
 	public int getID() {
 		return ID;
 	}
-
+	/**
+	 * Get method to get value.
+	 * @return integer
+	 */
 	public int getValue() {
 		return value;
 	}
-
+	/**
+	 * Set method to set value of button.
+	 * @param value integer
+	 */
 	public void setValue(int value) {
 		this.value = value;
 	}
-
+	/**
+	 * Set method to change editable.
+	 * @param boo boolean
+	 */
 	public void setEditable(boolean boo) {
 		this.editable = boo;
 	}
-
+	/**
+	 * Get method to get editable of button.
+	 * @return boolean
+	 */
 	public boolean getEditable() {
 		return editable;
 	}
