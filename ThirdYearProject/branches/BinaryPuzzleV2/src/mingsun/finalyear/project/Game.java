@@ -226,7 +226,7 @@ public class Game extends JFrame {
 		level = 1;
 	}
 	/**
-	 * 
+	 * build a grid interface of specific size defined when solving mode, 4x4, 6x6 and 8x8 is clicked.
 	 * @author Ming Sun
 	 *
 	 */
@@ -243,7 +243,11 @@ public class Game extends JFrame {
 			buildInterface(size);
 		}
 	}
-
+	/**
+	 * build a grid interface of specific size defined with list contents when playing mode, 4x4, 6x6 and 8x8 is clicked.
+	 * @author Ming Sun
+	 *
+	 */
 	private class GamePlayListener implements ActionListener {
 		private int size;
 		private int level;
@@ -269,7 +273,12 @@ public class Game extends JFrame {
 			buildFilledInterface(size, newNbList);
 		}
 	}
-
+	/**
+	 * load a next level grid from local resource folder and re-build the interface again, 
+	 * with higher level of difficult contents when the next button is clicked.
+	 * @author Ming Sun
+	 *
+	 */
 	private class NextButtonListener implements ActionListener {
 		private int size;
 		private int level;
@@ -296,7 +305,11 @@ public class Game extends JFrame {
 			buildFilledInterface(size, newNbList);
 		}
 	}
-
+	/**
+	 * NumberButtonList as input argument and run check method through it when check button is clicked. 
+	 * @author Ming Sun
+	 *
+	 */
 	private class CheckListener implements ActionListener {
 		private int size;
 		private NumberButtonList nbList;
@@ -325,7 +338,12 @@ public class Game extends JFrame {
 			}
 		}
 	}
-
+	/**
+	 * This class takes NumberButtonList as input argument and reset the grid into original states, 
+	 * when restart button is clicked. 
+	 * @author Ming Sun
+	 *
+	 */
 	private class ReStartListener implements ActionListener {
 		private NumberButtonList nbList;
 
@@ -344,7 +362,11 @@ public class Game extends JFrame {
 			}
 		}
 	}
-
+	/**
+	 * This class takes NumberButtonList as input argument and solve the grid by calling solving method.
+	 * @author Ming Sun
+	 *
+	 */
 	private class SolveListener implements ActionListener {
 		private NumberButtonList nbList;
 		private SolvePuzzle solver;
@@ -362,7 +384,12 @@ public class Game extends JFrame {
 			solver.solverIt();
 		}
 	}
-	
+	/**
+	 * PrintButtonListener takes NumberButtonList as input argument and print the current grid snapshot into a txt file,
+	 * when print grid option is selected. 
+	 * @author GOU
+	 *
+	 */
 	private class PrintButtonListener implements ActionListener {
 		private int size;
 		private NumberButtonList nbList;
