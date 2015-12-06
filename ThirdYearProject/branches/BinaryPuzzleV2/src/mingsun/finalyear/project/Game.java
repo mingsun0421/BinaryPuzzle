@@ -404,6 +404,7 @@ public class Game extends JFrame {
 			// TODO Auto-generated method stub
 			OutPutTxt opt = new OutPutTxt(nbList,size);
 			opt.output();
+			JOptionPane.showMessageDialog(null, "Puzzle is saved");
 		}
 	}
 }
