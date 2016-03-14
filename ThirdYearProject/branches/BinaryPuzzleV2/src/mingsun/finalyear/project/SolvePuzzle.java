@@ -1,6 +1,7 @@
 package mingsun.finalyear.project;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 /**
  * the class is designed to support solving method which can be applied different size of puzzles.
  * @author Ming Sun
@@ -54,22 +55,28 @@ public class SolvePuzzle {
 	 */
 	public void solverIt() {
 		ArrayList<Integer> marked = new ArrayList<Integer>();
+		HashMap<Integer, Boolean> marked2 = new HashMap<Integer, Boolean>();
 		int markedIndex = 0;
 		while(index < gameSize*gameSize){
 			numberButtonList.getNumberButton(index).setIcon();
 			System.out.println("LOOP.. INDEX "+index);
 			if(numberButtonList.getNumberButton(index).getValue() == 2){
 				marked.add(index);
+				marked2.put(index, true);
 				markedIndex = markedIndex + 1;
 				numberButtonList.getNumberButton(index).setValue(value);
 				if(checkPartialResult()){
 					index = index + 1;
 				} else {
 					if(markedIndex!=0 && index!=0){
-						numberButtonList.getNumberButton(index).setValue(2);
-						markedIndex = markedIndex - 1;
-						index = marked.get(markedIndex);
-						value = Math.abs(value - 1);
+						if(marked2.get(index)==true){
+							numberButtonList.getNumberButton(index).setValue(Math.abs(value-1));
+							marked2.replace(index, true, false);
+						} else {
+							numberButtonList.getNumberButton(index).setValue(2);
+							markedIndex = markedIndex - 1;
+							index = marked.get(markedIndex);
+						}
 					} else {
 						index = marked.get(0);
 						markedIndex = 0;
@@ -78,6 +85,7 @@ public class SolvePuzzle {
 			} else {
 				index = index + 1;
 			}
+			System.out.println(marked2.toString());
 		}
 		numberButtonList.setAllIcon();
 	}
