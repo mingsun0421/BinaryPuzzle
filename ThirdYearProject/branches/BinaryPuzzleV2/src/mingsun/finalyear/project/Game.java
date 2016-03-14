@@ -46,6 +46,7 @@ public class Game extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenu gameMenu, moreOptions;
 	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, printButton;
+	private JMenuItem solveMethod, backTracking, startegyBT;
 	private JPanel panel = new JPanel();
 	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
@@ -125,16 +126,22 @@ public class Game extends JFrame {
 		solveMode.add(eightEightS);
 		eightEight.addActionListener(new GamePlayListener(8, 1));
 		eightEightS.addActionListener(new GameSizeListener(8));
-
-		new JMenuItem("solve it");
-		new JMenuItem("check it");
 		// checkMenu.add(solveButton);
 		// checkMenu.add(checkButton);
 		// checkButton.addActionListener(new CheckListener(gridSize,nbList));
 		// End JMenuBar
 		//JMenuItem for print
+		solveMethod = new JMenuItem("solving");
 		printButton = new JMenuItem("print grid");
+		
+		moreOptions.add(solveMethod);
 		moreOptions.add(printButton);
+		
+		backTracking = new JMenuItem("bT");
+		startegyBT = new JMenuItem("sBT");
+		solveMethod.add(backTracking);
+		solveMethod.add(startegyBT);
+		
 		
 		add(panel);
 		setVisible(true);

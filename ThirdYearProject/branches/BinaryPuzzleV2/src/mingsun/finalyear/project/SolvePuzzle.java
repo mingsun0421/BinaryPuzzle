@@ -59,7 +59,6 @@ public class SolvePuzzle {
 		int markedIndex = 0;
 		while(index < gameSize*gameSize){
 			numberButtonList.getNumberButton(index).setIcon();
-			System.out.println("LOOP.. INDEX "+index);
 			if(numberButtonList.getNumberButton(index).getValue() == 2){
 				marked.add(index);
 				marked2.put(index, true);
@@ -74,6 +73,7 @@ public class SolvePuzzle {
 							marked2.replace(index, true, false);
 						} else {
 							numberButtonList.getNumberButton(index).setValue(2);
+							marked2.remove(index);
 							markedIndex = markedIndex - 1;
 							index = marked.get(markedIndex);
 						}
