@@ -44,13 +44,14 @@ public class Game extends JFrame {
 	 * @param level integer indicates level of player is playing. 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JMenu gameMenu, moreOptions;
+	private JMenu gameMenu, moreOptions, hintOption;
 	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, printButton;
-	private JMenuItem solveMethod, backTracking, startegyBT;
+	private JMenuItem solveMethod, backTracking, strategyBT, giveHint;
 	private JPanel panel = new JPanel();
 	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
 	public JButton checkResultButton, nextLevelButton;
+	public int solveType = 1;
 	private int level = 1;
 	/**
 	 * Main method. If invokeLater is called from the event dispatching thread.
@@ -94,8 +95,10 @@ public class Game extends JFrame {
 		setJMenuBar(jmenuBar);
 		gameMenu = new JMenu("GAME MODE");
 		moreOptions = new JMenu("MORE OPTIONS");
+		hintOption = new JMenu("HINT");
 		jmenuBar.add(gameMenu);
 		jmenuBar.add(moreOptions);
+		jmenuBar.add(hintOption);
 
 		soloMode = new JMenu("Playing Mode");
 		solveMode = new JMenu("Sloving Mode");
@@ -138,11 +141,14 @@ public class Game extends JFrame {
 		moreOptions.add(printButton);
 		
 		backTracking = new JMenuItem("bT");
-		startegyBT = new JMenuItem("sBT");
+		strategyBT = new JMenuItem("sBT");
 		solveMethod.add(backTracking);
-		solveMethod.add(startegyBT);
+		solveMethod.add(strategyBT);
+		backTracking.addActionListener(new SolvingMode(1));
+		strategyBT.addActionListener(new SolvingMode(2));
 		
-		
+		giveHint = new JMenuItem("hint");
+		hintOption.add(giveHint);
 		add(panel);
 		setVisible(true);
 	}
@@ -413,5 +419,19 @@ public class Game extends JFrame {
 			opt.output();
 			JOptionPane.showMessageDialog(null, "Puzzle is saved");
 		}
+	}
+	
+	private class SolvingMode implements ActionListener {
+		private int type;
+		
+		public SolvingMode(int type) {
+			this.type = type;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			solveType = type;
+		}
+		
 	}
 }
