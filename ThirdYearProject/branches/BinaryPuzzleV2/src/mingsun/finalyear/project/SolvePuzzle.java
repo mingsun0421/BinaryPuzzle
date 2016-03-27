@@ -2,6 +2,9 @@ package mingsun.finalyear.project;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
 /**
  * the class is designed to support solving method which can be applied different size of puzzles.
  * @author Ming Sun
@@ -55,37 +58,85 @@ public class SolvePuzzle {
 	 */
 	public void solverIt() {
 		ArrayList<Integer> marked = new ArrayList<Integer>();
-		HashMap<Integer, Boolean> marked2 = new HashMap<Integer, Boolean>();
-		int markedIndex = 0;
+		ArrayList<Integer> marked2 = new ArrayList<Integer>();
+		//HashMap<Integer, Boolean> marked2 = new HashMap<Integer, Boolean>();
+		int markedIndex = -1;
 		while(index < gameSize*gameSize){
 			numberButtonList.getNumberButton(index).setIcon();
 			if(numberButtonList.getNumberButton(index).getValue() == 2){
 				marked.add(index);
-				marked2.put(index, true);
+				marked2.add(0);
 				markedIndex = markedIndex + 1;
 				numberButtonList.getNumberButton(index).setValue(value);
 				if(checkPartialResult()){
 					index = index + 1;
 				} else {
 					if(markedIndex!=0 && index!=0){
-						if(marked2.get(index)==true){
+						if(marked2.get(markedIndex)==0){
 							numberButtonList.getNumberButton(index).setValue(Math.abs(value-1));
-							marked2.replace(index, true, false);
+							marked2.set(markedIndex, 1);
 						} else {
 							numberButtonList.getNumberButton(index).setValue(2);
-							marked2.remove(index);
+							marked2.set(markedIndex, 0);
 							markedIndex = markedIndex - 1;
 							index = marked.get(markedIndex);
 						}
 					} else {
 						index = marked.get(0);
-						markedIndex = 0;
+						markedIndex = -1;
 					}
 				}
 			} else {
 				index = index + 1;
 			}
 			System.out.println(marked2.toString());
+		}
+		numberButtonList.setAllIcon();
+	}
+	/**
+	 * Brute force solving algorithm
+	 */
+	public void solveItBF() {
+		int count = 0;
+		ArrayList<Integer> combinations = new ArrayList<Integer>();
+		ArrayList<Integer> positions = new ArrayList<Integer>();
+		for(int index=0; index<gameSize*gameSize; index++) {
+			if(numberButtonList.getNumberButton(index).getValue()==2) {
+				count = count + 1;
+				positions.add(index);
+			}
+		}
+		//Find all possible combinations
+		for(int index=0; index < Math.pow(2, count); index++) {
+			String s = Integer.toBinaryString(index);
+			for(int length = s.length(); length<count; length++) {
+				s = "0"+s;
+			}
+			for( int i=0; i< s.length(); i++) {
+				combinations.add(Character.getNumericValue(s.charAt(i)));
+			}
+			for(int cindex=0; cindex<combinations.size();cindex++) {
+				int pos = positions.get(cindex);
+				int val = combinations.get(cindex);
+				numberButtonList.getNumberButton(pos).setValue(val);
+			}
+			CheckResult checkResult = new CheckResult(numberButtonList, gameSize);
+			CheckComplete checkComplete = new CheckComplete(numberButtonList, gameSize);
+			if (checkComplete.ifComplete()) {
+				if (checkResult.checkEquality() && checkResult.checkNeighbours()) {
+					System.out.println("Yes");
+					JOptionPane.showMessageDialog(null, "Puzzle solved");
+					break;
+				} else {
+					System.out.println("No");
+					System.out.println("Trying: "+index);
+					combinations.clear();
+					for(int cindex=0; cindex<positions.size();cindex++) {
+						int pos = positions.get(cindex);
+						numberButtonList.getNumberButton(pos).setValue(2);
+					}
+				}
+			}
 		}
 		numberButtonList.setAllIcon();
 	}

@@ -51,8 +51,12 @@ public class Game extends JFrame {
 	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
 	public JButton checkResultButton, nextLevelButton;
+	/**
+	 * solveType: 1: Brute Force. 2: Backtrack. 3: Strategic BK. 4. LG
+	 */
 	public int solveType = 1;
 	private int level = 1;
+	private JMenuItem bruteForce, pureLogic;
 	/**
 	 * Main method. If invokeLater is called from the event dispatching thread.
 	 * @param args arguments.
@@ -134,18 +138,24 @@ public class Game extends JFrame {
 		// checkButton.addActionListener(new CheckListener(gridSize,nbList));
 		// End JMenuBar
 		//JMenuItem for print
-		solveMethod = new JMenuItem("solving");
-		printButton = new JMenuItem("print grid");
+		solveMethod = new JMenu("SOLVING METHODS");
+		printButton = new JMenuItem("PRINT");
 		
 		moreOptions.add(solveMethod);
 		moreOptions.add(printButton);
 		
-		backTracking = new JMenuItem("bT");
-		strategyBT = new JMenuItem("sBT");
+		backTracking = new JMenuItem("BACKTRACKING");
+		strategyBT = new JMenuItem("S-BACKTRACKING");
+		bruteForce = new JMenuItem("BRUTE FORCE");
+		pureLogic = new JMenuItem("PURE LOGIC");
 		solveMethod.add(backTracking);
 		solveMethod.add(strategyBT);
-		backTracking.addActionListener(new SolvingMode(1));
-		strategyBT.addActionListener(new SolvingMode(2));
+		solveMethod.add(bruteForce);
+		solveMethod.add(pureLogic);
+		bruteForce.addActionListener(new SolvingMode(1));
+		backTracking.addActionListener(new SolvingMode(2));
+		strategyBT.addActionListener(new SolvingMode(3));
+		pureLogic.addActionListener(new SolvingMode(4));
 		
 		giveHint = new JMenuItem("hint");
 		hintOption.add(giveHint);
@@ -177,7 +187,7 @@ public class Game extends JFrame {
 		JButton solveButton = new JButton("");
 		solveButton.setIcon(new ImageIcon("./resource/button_ok.png"));
 		solveButton.setBackground(Color.WHITE);
-		solveButton.addActionListener(new SolveListener(nbList, gridSize));
+		solveButton.addActionListener(new SolveListener(nbList, gridSize, solveType));
 		//Add print button listener here
 		printButton.addActionListener(new PrintButtonListener(nbList,gridSize));
 		panel.add(solveButton);
@@ -384,17 +394,26 @@ public class Game extends JFrame {
 		private NumberButtonList nbList;
 		private SolvePuzzle solver;
 		private int size;
+		private int type;
 
-		public SolveListener(NumberButtonList nbList, int size) {
+		public SolveListener(NumberButtonList nbList, int size, int type) {
 			this.nbList = nbList;
 			this.size = size;
+			this.type = type;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			solver = new SolvePuzzle(nbList, size);
-			solver.solverIt();
+			switch(type){
+			case 1: solver.solveItBF();
+			case 2: solver.solverIt();
+			case 3: solver.solverIt();
+			case 4: solver.solverIt();
+				default:solver.solveItBF();
+					break;
+			}
 		}
 	}
 	/**
@@ -431,6 +450,16 @@ public class Game extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			solveType = type;
+			if(type == 1){
+			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Brute Force");
+			} else if(type == 2) {
+			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Backtracking");
+			} else if(type == 3) {
+			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Strategic Backtracking");
+			} else {
+			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Pure Logic");
+			
+			}
 		}
 		
 	}
