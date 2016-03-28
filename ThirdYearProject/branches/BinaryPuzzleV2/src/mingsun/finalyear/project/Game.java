@@ -119,20 +119,20 @@ public class Game extends JFrame {
 		soloMode.add(fourFour);
 		// SOLVE
 		solveMode.add(fourFourS);
-		fourFourS.addActionListener(new GameSizeListener(4));
+		fourFourS.addActionListener(new GameSizeListener(4, 1));
 		fourFour.addActionListener(new GamePlayListener(4, 1));
 
 		soloMode.add(sixSix);
 		// SOLVE
 		solveMode.add(sixSixS);
-		sixSixS.addActionListener(new GameSizeListener(6));
+		sixSixS.addActionListener(new GameSizeListener(6, 1));
 		sixSix.addActionListener(new GamePlayListener(6, 1));
 
 		soloMode.add(eightEight);
 		// SOLVE
 		solveMode.add(eightEightS);
 		eightEight.addActionListener(new GamePlayListener(8, 1));
-		eightEightS.addActionListener(new GameSizeListener(8));
+		eightEightS.addActionListener(new GameSizeListener(8, 1));
 		// checkMenu.add(solveButton);
 		// checkMenu.add(checkButton);
 		// checkButton.addActionListener(new CheckListener(gridSize,nbList));
@@ -173,17 +173,18 @@ public class Game extends JFrame {
 	 * This method builds a empty grid with size it specified in the input.
 	 * @param size Integer value, grid size.
 	 */
-	public void buildInterface(int size) {
+	public void buildInterface(int size, NumberButtonList nbList) {
 		// TODO gridSize cannot update
 		gridSize = size;
 		System.out.println("building interface: " + size);
 		panel.removeAll();
 		panel.setLayout(new GridLayout(size + 1, size));
 		for (int i = 0; i < size * size; i++) {
-			NumberButton numberButton = new NumberButton(i);
-			nbList.add(numberButton);
+			NumberButton numberButton = nbList.getNumberButton(i);
+			numberButton.setIcon();
 			panel.add(numberButton);
 		}
+		setNbList(nbList);
 		JButton solveButton = new JButton("");
 		solveButton.setIcon(new ImageIcon("./resource/button_ok.png"));
 		solveButton.setBackground(Color.WHITE);
@@ -225,6 +226,7 @@ public class Game extends JFrame {
 		JButton hintButton = new JButton();
 		hintButton.setIcon(new ImageIcon("./resource/hint.png"));
 		hintButton.setBackground(Color.WHITE);
+		hintButton.addActionListener(new HintButton(nbList, gridSize));
 		panel.add(hintButton);
 		nextLevelButton = new JButton();
 		nextLevelButton.setIcon(new ImageIcon("./resource/next.png"));
@@ -235,6 +237,7 @@ public class Game extends JFrame {
 		printButton.addActionListener(new PrintButtonListener(nbList,gridSize));
 		add(panel);
 		setVisible(true);
+		//here
 	}
 	/**
 	 * Level up method.
@@ -255,15 +258,27 @@ public class Game extends JFrame {
 	 */
 	private class GameSizeListener implements ActionListener {
 		private int size;
+		private int level;
 
-		public GameSizeListener(int size) {
+		public GameSizeListener(int size, int level) {
+			this.level = level;
 			this.size = size;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			buildInterface(size);
+			levelReset();
+			String fileName = "./resource/" + size + "x" + size + "Puzzle" + level + ".txt";
+			ReadPuzzleTxt rpt = new ReadPuzzleTxt(fileName, size);
+			NumberButtonList newNbList = null;
+			try {
+				newNbList = rpt.getList();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			buildInterface(size, newNbList);
 		}
 	}
 	/**
@@ -406,13 +421,14 @@ public class Game extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			solver = new SolvePuzzle(nbList, size);
-			switch(type){
-			case 1: solver.solveItBF();
-			case 2: solver.solverIt();
-			case 3: solver.solverIt();
-			case 4: solver.solverIt();
-				default:solver.solveItBF();
-					break;
+			if(type == 1) {
+				solver.solveItBF();
+			} else if(type == 2) {
+				solver.solverIt();
+			} else if(type == 3) {
+				solver.solverIt();
+			} else {
+				solver.solverIt();
 			}
 		}
 	}
@@ -460,6 +476,22 @@ public class Game extends JFrame {
 			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Pure Logic");
 			
 			}
+		}
+		
+	}
+	
+	private class HintButton implements ActionListener {
+		private NumberButtonList numberButtonList;
+		private int gameSize;
+		public HintButton(NumberButtonList numberButtonList, int gameSize) {
+			this.numberButtonList = numberButtonList;
+			this.gameSize = gameSize;
+		}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			Hint hint = new Hint(numberButtonList, gameSize);
+			hint.giveHint();
 		}
 		
 	}

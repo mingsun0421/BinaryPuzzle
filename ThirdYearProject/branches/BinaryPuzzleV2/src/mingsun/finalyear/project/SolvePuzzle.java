@@ -1,9 +1,6 @@
 package mingsun.finalyear.project;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-
 import javax.swing.JOptionPane;
 /**
  * the class is designed to support solving method which can be applied different size of puzzles.
@@ -96,7 +93,7 @@ public class SolvePuzzle {
 	/**
 	 * Brute force solving algorithm
 	 */
-	public void solveItBF() {
+	public void solveItBF(){
 		int count = 0;
 		ArrayList<Integer> combinations = new ArrayList<Integer>();
 		ArrayList<Integer> positions = new ArrayList<Integer>();
@@ -115,6 +112,7 @@ public class SolvePuzzle {
 			for( int i=0; i< s.length(); i++) {
 				combinations.add(Character.getNumericValue(s.charAt(i)));
 			}
+			System.out.println("HERE: SIZE OF P & C "+combinations.size()+"  "+positions.size());
 			for(int cindex=0; cindex<combinations.size();cindex++) {
 				int pos = positions.get(cindex);
 				int val = combinations.get(cindex);
