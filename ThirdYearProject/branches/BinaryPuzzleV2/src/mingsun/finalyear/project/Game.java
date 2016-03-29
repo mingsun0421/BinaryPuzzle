@@ -44,11 +44,10 @@ public class Game extends JFrame {
 	 * @param level integer indicates level of player is playing. 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JMenu gameMenu, moreOptions, hintOption;
+	private JMenu gameMenu, moreOptions;;
 	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, printButton;
-	private JMenuItem solveMethod, backTracking, strategyBT, giveHint;
+	private JMenuItem solveMethod, backTracking, strategyBT, generatePuzzle, localPuzzle, onlinePuzzle;
 	private JPanel panel = new JPanel();
-	private NumberButtonList nbList = new NumberButtonList();
 	public int gridSize = 1;
 	public JButton checkResultButton, nextLevelButton;
 	/**
@@ -57,6 +56,12 @@ public class Game extends JFrame {
 	public int solveType = 1;
 	private int level = 1;
 	private JMenuItem bruteForce, pureLogic;
+	
+	/**
+	 * 
+	 */
+	private String urlAddress = "mingsunbinarypuzzle.com";
+	private String fileName = "OutPutTxt";
 	/**
 	 * Main method. If invokeLater is called from the event dispatching thread.
 	 * @param args arguments.
@@ -99,10 +104,10 @@ public class Game extends JFrame {
 		setJMenuBar(jmenuBar);
 		gameMenu = new JMenu("GAME MODE");
 		moreOptions = new JMenu("MORE OPTIONS");
-		hintOption = new JMenu("HINT");
+		generatePuzzle = new JMenu("GENERATION");
 		jmenuBar.add(gameMenu);
 		jmenuBar.add(moreOptions);
-		jmenuBar.add(hintOption);
+		jmenuBar.add(generatePuzzle);
 
 		soloMode = new JMenu("Playing Mode");
 		solveMode = new JMenu("Sloving Mode");
@@ -117,27 +122,19 @@ public class Game extends JFrame {
 		eightEightS = new JMenuItem("8X8");
 
 		soloMode.add(fourFour);
-		// SOLVE
 		solveMode.add(fourFourS);
 		fourFourS.addActionListener(new GameSizeListener(4, 1));
 		fourFour.addActionListener(new GamePlayListener(4, 1));
 
 		soloMode.add(sixSix);
-		// SOLVE
 		solveMode.add(sixSixS);
 		sixSixS.addActionListener(new GameSizeListener(6, 1));
 		sixSix.addActionListener(new GamePlayListener(6, 1));
 
 		soloMode.add(eightEight);
-		// SOLVE
 		solveMode.add(eightEightS);
 		eightEight.addActionListener(new GamePlayListener(8, 1));
 		eightEightS.addActionListener(new GameSizeListener(8, 1));
-		// checkMenu.add(solveButton);
-		// checkMenu.add(checkButton);
-		// checkButton.addActionListener(new CheckListener(gridSize,nbList));
-		// End JMenuBar
-		//JMenuItem for print
 		solveMethod = new JMenu("SOLVING METHODS");
 		printButton = new JMenuItem("PRINT");
 		
@@ -157,8 +154,11 @@ public class Game extends JFrame {
 		strategyBT.addActionListener(new SolvingMode(3));
 		pureLogic.addActionListener(new SolvingMode(4));
 		
-		giveHint = new JMenuItem("hint");
-		hintOption.add(giveHint);
+		localPuzzle = new JMenuItem("LOCAL");
+		onlinePuzzle = new JMenuItem("ONLINE");
+		onlinePuzzle.addActionListener(new WebGenerator(urlAddress,fileName));
+		generatePuzzle.add(localPuzzle);
+		generatePuzzle.add(onlinePuzzle);
 		add(panel);
 		setVisible(true);
 	}
@@ -167,7 +167,6 @@ public class Game extends JFrame {
 	 * @param list NumberButtonList stores all grid items.
 	 */
 	public void setNbList(NumberButtonList list) {
-		nbList = list;
 	}
 	/**
 	 * This method builds a empty grid with size it specified in the input.
@@ -244,6 +243,9 @@ public class Game extends JFrame {
 	 */
 	public void levelPlus() {
 		level = level + 1;
+		if(level == 3) {
+			level = 1;
+		}
 	}
 	/**
 	 * reset level to 1.
@@ -331,6 +333,10 @@ public class Game extends JFrame {
 			// TODO Auto-generated method stub
 			level = level + 1;
 			levelPlus();
+			if(level == 3) {
+				level = 1;
+				levelReset();
+			}
 			String fileName = "./resource/" + size + "x" + size + "Puzzle" + level + ".txt";
 			ReadPuzzleTxt rpt = new ReadPuzzleTxt(fileName, size);
 			NumberButtonList newNbList = null;
@@ -490,6 +496,27 @@ public class Game extends JFrame {
 			// TODO Auto-generated method stub
 			Hint hint = new Hint(numberButtonList, gameSize);
 			hint.giveHint();
+		}
+		
+	}
+	
+	private class WebGenerator implements ActionListener {
+		private String url;
+		private String file;
+		public WebGenerator(String url, String file) {
+			this.url = url;
+			this.file = file;
+		}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			OnlineWeb ow = new OnlineWeb(url,file);
+			try {
+				ow.getText();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

@@ -22,30 +22,6 @@ public class SolvePuzzle {
 		this.numberButtonList = numberButtonList;
 		this.gameSize = gameSize;
 	}
-	
-	/**
-	public boolean solveIt(int index, int value) {
-		if(index == gameSize*gameSize){
-			return true;
-		}
-		System.out.println("Round: "+index+" Value:"+value);
-		numberButtonList.getNumberButton(index).setIcon();
-		if(numberButtonList.getNumberButton(index).getValue()==2){
-			numberButtonList.getNumberButton(index).setValue(value);
-			if(checkPartialResult()){
-				index = index + 1;
-				return solveIt(index,0);
-			} else {
-				index = index - 1;
-				return solveIt(index,Math.abs(value-1));
-			}
-		}
-		else{
-			index = index + 1;
-			return solveIt(index,0);
-		}
-	}
-	**/
 	/**
 	 * Backtracking solving algorithm.
 	 */

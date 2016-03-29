@@ -10,7 +10,6 @@ public class CheckComplete {
 	 * @param gameSize Integer, size of grid.
 	 */
 	private NumberButtonList numberButtonList;
-	private int gameSize;
 	/**
 	 * Constructor.
 	 * @param numberButtonList NumberButtonList list of all number buttons for 1s and 0s.
@@ -18,7 +17,6 @@ public class CheckComplete {
 	 */
 	public CheckComplete(NumberButtonList numberButtonList, int gameSize) {
 		this.numberButtonList = numberButtonList;
-		this.gameSize = gameSize;
 	}
 	/**
 	 * Check if grid is completed.
