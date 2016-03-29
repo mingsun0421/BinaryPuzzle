@@ -13,8 +13,6 @@ import javax.swing.JOptionPane;
 public class SolvePuzzle {
 	private NumberButtonList numberButtonList;
 	private int gameSize;
-	private int index;
-	private int value;
 	/**
 	 * Constructor.
 	 * @param numberButtonList list of number buttons
@@ -23,8 +21,6 @@ public class SolvePuzzle {
 	public SolvePuzzle(NumberButtonList numberButtonList, int gameSize) {
 		this.numberButtonList = numberButtonList;
 		this.gameSize = gameSize;
-		this.index = 0;
-		this.value = 1;
 	}
 	
 	/**
@@ -53,40 +49,55 @@ public class SolvePuzzle {
 	/**
 	 * Backtracking solving algorithm.
 	 */
+	
 	public void solverIt() {
+		ArrayList<Integer> positions = new ArrayList<Integer>();
 		ArrayList<Integer> marked = new ArrayList<Integer>();
-		ArrayList<Integer> marked2 = new ArrayList<Integer>();
-		//HashMap<Integer, Boolean> marked2 = new HashMap<Integer, Boolean>();
-		int markedIndex = -1;
-		while(index < gameSize*gameSize){
-			numberButtonList.getNumberButton(index).setIcon();
-			if(numberButtonList.getNumberButton(index).getValue() == 2){
-				marked.add(index);
-				marked2.add(0);
-				markedIndex = markedIndex + 1;
-				numberButtonList.getNumberButton(index).setValue(value);
-				if(checkPartialResult()){
-					index = index + 1;
+		for(int index=0; index<numberButtonList.getSize(); index++) {
+			if(numberButtonList.getNumberButton(index).getValue()==2) {
+				positions.add(index);
+				marked.add(0);
+			}
+		}
+		System.out.println("Positons size: "+positions.size());
+		int pIndex=0;
+		int count = 0;
+		while(pIndex < positions.size()){
+			System.out.println("TYR: "+count);
+			System.out.println("INDEX:  "+pIndex);
+			System.out.println(" MARKED: "+marked.get(pIndex));
+			if(marked.get(pIndex) == 0) {
+				numberButtonList.getNumberButton(positions.get(pIndex)).setValue(1);
+				marked.set(pIndex, 1);
+				if(checkEquality() && checkNeighbours()){
+					pIndex = pIndex + 1;
 				} else {
-					if(markedIndex!=0 && index!=0){
-						if(marked2.get(markedIndex)==0){
-							numberButtonList.getNumberButton(index).setValue(Math.abs(value-1));
-							marked2.set(markedIndex, 1);
-						} else {
-							numberButtonList.getNumberButton(index).setValue(2);
-							marked2.set(markedIndex, 0);
-							markedIndex = markedIndex - 1;
-							index = marked.get(markedIndex);
-						}
+					numberButtonList.getNumberButton(positions.get(pIndex)).setValue(0);
+					marked.set(pIndex, 2);
+					if(checkEquality() && checkNeighbours()) {
+						pIndex = pIndex + 1;
 					} else {
-						index = marked.get(0);
-						markedIndex = -1;
+						marked.set(pIndex, 0);
+						numberButtonList.getNumberButton(positions.get(pIndex)).setValue(2);
+						pIndex = pIndex - 1;
 					}
 				}
-			} else {
-				index = index + 1;
+			} else if(marked.get(pIndex) == 1){
+				numberButtonList.getNumberButton(positions.get(pIndex)).setValue(0);
+				marked.set(pIndex, 2);
+				if(checkEquality() && checkNeighbours()) {
+					pIndex = pIndex + 1;
+				} else {
+					numberButtonList.getNumberButton(positions.get(pIndex)).setValue(2);
+					marked.set(pIndex, 0);
+					pIndex = pIndex - 1;
+				}
+			} else if(marked.get(pIndex) == 2){
+				numberButtonList.getNumberButton(positions.get(pIndex)).setValue(2);
+				marked.set(pIndex, 0);
+				pIndex = pIndex - 1;
 			}
-			System.out.println(marked2.toString());
+			count = count + 1;
 		}
 		numberButtonList.setAllIcon();
 	}
@@ -112,7 +123,6 @@ public class SolvePuzzle {
 			for( int i=0; i< s.length(); i++) {
 				combinations.add(Character.getNumericValue(s.charAt(i)));
 			}
-			System.out.println("HERE: SIZE OF P & C "+combinations.size()+"  "+positions.size());
 			for(int cindex=0; cindex<combinations.size();cindex++) {
 				int pos = positions.get(cindex);
 				int val = combinations.get(cindex);
@@ -138,48 +148,49 @@ public class SolvePuzzle {
 		}
 		numberButtonList.setAllIcon();
 	}
-	/**
-	 * To check if grid follows the rules.
-	 * @return boolean
-	 */
-	public boolean checkPartialResult(){
-		System.out.println("Enter checking");
-		//Check every row, if the number of 0 or 1 is more than it should be.
+	public boolean checkEquality(){
+		//check each row's number of 1 and 0
 		for(int row=0; row<gameSize; row++) {
 			int countZero = 0, countOne = 0;
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize; numberIndex++) {
 				if(numberButtonList.getNumberButton(numberIndex).getValue()==0) {
 					countZero = countZero + 1;
-				} 
-				if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
+				} else if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
 					countOne = countOne + 1;
 				}
 			}
-			if(countZero>gameSize/2 || countOne>gameSize/2){
+			if(countZero > gameSize/2 || countOne > gameSize/2) {
 				return false;
 			}
 		}
-		//Check every column, if the number of 0 or 1 is more than it should be.
+		//check each column's number of 1 and 0
 		for(int col=0; col<gameSize; col++) {
 			int countZero = 0, countOne = 0;
 			for(int numberIndex=col; numberIndex <= col+gameSize*(gameSize-1); numberIndex = numberIndex + gameSize) {
 				if(numberButtonList.getNumberButton(numberIndex).getValue()==0) {
 					countZero = countZero + 1;
-				}
-				if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
+				} else if(numberButtonList.getNumberButton(numberIndex).getValue()==1) {
 					countOne = countOne + 1;
 				} 
 			}
-			if(countZero>gameSize/2 || countOne>gameSize/2) {
+			if(countZero > gameSize/2 || countOne > gameSize/2) {
 				return false;
 			}
 		}
+		return true;
+	}
+	/**
+	 * Check if there are 2 same number for each vertical and horizontal neighbours.
+	 * @return Boolean 
+	 */
+	public boolean checkNeighbours(){
+		//Check every horizontal neighbours
 		for(int row=0; row<gameSize; row++) {
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize-2; numberIndex++) {
 				int value1 = numberButtonList.getNumberButton(numberIndex).getValue();
 				int value2 = numberButtonList.getNumberButton(numberIndex+1).getValue();
 				int value3 = numberButtonList.getNumberButton(numberIndex+2).getValue();
-				if(value2 != 2 && value3 != 2){
+				if(value1 != 2 || value2 != 2 || value3 !=2){
 					if(value1 == value2 && value2 == value3) {
 						return false;
 					}
@@ -192,16 +203,14 @@ public class SolvePuzzle {
 				int value1 = numberButtonList.getNumberButton(numberIndex).getValue();
 				int value2 = numberButtonList.getNumberButton(numberIndex+gameSize).getValue();
 				int value3 = numberButtonList.getNumberButton(numberIndex+gameSize+gameSize).getValue();
-				if(value2 != 2 && value3 != 2){
+				if(value1 != 2 || value2 != 2 || value3 !=2){
 					if(value1 == value2 && value2 == value3) {
 						return false;
 					}
 				}
 			}
 		}
-		System.out.println("CHECKING SECCUESS");
 		return true;
 	}
-	
-	
 }
+	

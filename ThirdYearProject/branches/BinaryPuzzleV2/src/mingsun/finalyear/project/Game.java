@@ -188,7 +188,7 @@ public class Game extends JFrame {
 		JButton solveButton = new JButton("");
 		solveButton.setIcon(new ImageIcon("./resource/button_ok.png"));
 		solveButton.setBackground(Color.WHITE);
-		solveButton.addActionListener(new SolveListener(nbList, gridSize, solveType));
+		solveButton.addActionListener(new SolveListener(nbList, gridSize));
 		//Add print button listener here
 		printButton.addActionListener(new PrintButtonListener(nbList,gridSize));
 		panel.add(solveButton);
@@ -409,23 +409,21 @@ public class Game extends JFrame {
 		private NumberButtonList nbList;
 		private SolvePuzzle solver;
 		private int size;
-		private int type;
 
-		public SolveListener(NumberButtonList nbList, int size, int type) {
+		public SolveListener(NumberButtonList nbList, int size) {
 			this.nbList = nbList;
 			this.size = size;
-			this.type = type;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			solver = new SolvePuzzle(nbList, size);
-			if(type == 1) {
+			if(solveType == 1) {
 				solver.solveItBF();
-			} else if(type == 2) {
+			} else if(solveType == 2) {
 				solver.solverIt();
-			} else if(type == 3) {
+			} else if(solveType == 3) {
 				solver.solverIt();
 			} else {
 				solver.solverIt();
@@ -466,11 +464,11 @@ public class Game extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			solveType = type;
-			if(type == 1){
+			if(solveType == 1){
 			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Brute Force");
-			} else if(type == 2) {
+			} else if(solveType == 2) {
 			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Backtracking");
-			} else if(type == 3) {
+			} else if(solveType == 3) {
 			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Strategic Backtracking");
 			} else {
 			JOptionPane.showMessageDialog(null, "Solving algorithm is switched to Pure Logic");

@@ -23,9 +23,7 @@ public class CheckResult {
 	 */
 	public boolean checkEquality(){
 		//check each row's number of 1 and 0
-		System.out.println("GameSize: "+gameSize);
 		for(int row=0; row<gameSize; row++) {
-			System.out.println("herererer");
 			int countZero = 0, countOne = 0;
 			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize; numberIndex++) {
 				if(numberButtonList.getNumberButton(numberIndex).getValue()==0) {
@@ -36,7 +34,6 @@ public class CheckResult {
 					return false;
 				}
 			}
-			System.out.println("count result are:"+countZero+" "+countOne);
 			if(countZero != countOne) {
 				return false;
 			}
