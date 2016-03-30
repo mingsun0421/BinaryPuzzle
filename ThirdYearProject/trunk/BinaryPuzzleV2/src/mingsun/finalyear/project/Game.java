@@ -103,7 +103,8 @@ public class Game extends JFrame {
 	 */
 	public Game() {
 		super("Binary Puzzle");
-		ImageIcon logo = new ImageIcon("./resource/images/Icon_Sudoku_212.png");
+		//ImageIcon logo = new ImageIcon("./resource/images/Icon_Sudoku_212.png");
+		ImageIcon logo = new ImageIcon(getClass().getResource("/images/Icon_Sudoku_212.png"));
 		setIconImage(logo.getImage());
 		setSize(600, 600);
 		setResizable(false);
@@ -214,7 +215,7 @@ public class Game extends JFrame {
 		}
 		setNbList(nbList);
 		JButton solveButton = new JButton("");
-		solveButton.setIcon(new ImageIcon("./resource/images/button_ok.png"));
+		solveButton.setIcon(new ImageIcon(getClass().getResource("/images/button_ok.png")));
 		solveButton.setBackground(Color.WHITE);
 		solveButton.addActionListener(new SolveListener(nbList, gridSize));
 		// Add print button listener here
@@ -247,21 +248,21 @@ public class Game extends JFrame {
 		setNbList(nbList);
 		checkResultButton = new JButton();
 		panel.add(checkResultButton);
-		checkResultButton.setIcon(new ImageIcon("./resource/images/start.png"));
+		checkResultButton.setIcon(new ImageIcon(getClass().getResource("/images/start.png")));
 		checkResultButton.setBackground(Color.WHITE);
 		checkResultButton.addActionListener(new CheckListener(gridSize, nbList));
 		JButton restartButton = new JButton();
-		restartButton.setIcon(new ImageIcon("./resource/images/restart.png"));
+		restartButton.setIcon(new ImageIcon(getClass().getResource("/images/restart.png")));
 		restartButton.setBackground(Color.WHITE);
 		restartButton.addActionListener(new ReStartListener(nbList));
 		panel.add(restartButton);
 		JButton hintButton = new JButton();
-		hintButton.setIcon(new ImageIcon("./resource/images/hint.png"));
+		hintButton.setIcon(new ImageIcon(getClass().getResource("/images/hint.png")));
 		hintButton.setBackground(Color.WHITE);
 		hintButton.addActionListener(new HintButton(nbList, gridSize));
 		panel.add(hintButton);
 		nextLevelButton = new JButton();
-		nextLevelButton.setIcon(new ImageIcon("./resource/images/next.png"));
+		nextLevelButton.setIcon(new ImageIcon(getClass().getResource("/images/next.png")));
 		nextLevelButton.setBackground(Color.WHITE);
 		nextLevelButton.addActionListener(new NextButtonListener(size, level++));
 		panel.add(nextLevelButton);
