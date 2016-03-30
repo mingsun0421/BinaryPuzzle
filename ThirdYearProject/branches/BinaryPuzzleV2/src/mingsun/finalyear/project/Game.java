@@ -48,7 +48,7 @@ public class Game extends JFrame {
 	private JMenuItem soloMode, solveMode, fourFour, fourFourS, sixSix, sixSixS, eightEight, eightEightS, printButton;
 	private JMenuItem solveMethod, backTracking, strategyBT, generatePuzzle, localPuzzle, onlinePuzzle;
 	private JPanel panel = new JPanel();
-	public int gridSize = 1;
+	public int gridSize = 2;
 	public JButton checkResultButton, nextLevelButton;
 	/**
 	 * solveType: 1: Brute Force. 2: Backtrack. 3: Strategic BK. 4. LG

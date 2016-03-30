@@ -124,6 +124,31 @@ public class SolvePuzzle {
 		}
 		numberButtonList.setAllIcon();
 	}
+	
+	/**
+	 * Strategic Backtracking Algorithms
+	 */
+	public void solveSBT() {
+		for(int row=0; row<gameSize; row++) {
+			for(int numberIndex=row*gameSize; numberIndex<row*gameSize+gameSize; numberIndex++) {
+				int val1 = numberButtonList.getNumberButton(numberIndex).getValue();
+				if(numberIndex!= row*gameSize+gameSize-1) {
+					int val2 = numberButtonList.getNumberButton(numberIndex+1).getValue();
+					if(val1!=2 && val1 == val2){
+						if(numberIndex-1 >= row*gameSize) {
+							int val3 = val1;
+							numberButtonList.getNumberButton(numberIndex-1).setValue(val3);
+						}
+						if(numberIndex+2 < row*gameSize+gameSize) {
+							int val4 = val1;
+							numberButtonList.getNumberButton(numberIndex+2).setValue(val4);
+						}
+					}
+				} 
+			}
+		}
+		solverIt();
+	}
 	public boolean checkEquality(){
 		//check each row's number of 1 and 0
 		for(int row=0; row<gameSize; row++) {
