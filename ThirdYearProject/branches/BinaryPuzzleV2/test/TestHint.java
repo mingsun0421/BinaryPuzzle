@@ -7,11 +7,23 @@ import mingsun.finalyear.project.Hint;
 import mingsun.finalyear.project.NumberButton;
 import mingsun.finalyear.project.NumberButtonList;
 
+/**
+ * The JUnit tests Hint class.
+ * 
+ * @author Ming Sun
+ *
+ */
 public class TestHint {
 
 	static NumberButtonList nbList;
 	static NumberButton nb, nb2, nb3, nb4;
 	static Hint hint;
+
+	/**
+	 * Set up before the test methods are executed.
+	 * 
+	 * @throws Exception
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		nb = new NumberButton(1);
@@ -27,14 +39,17 @@ public class TestHint {
 		nbList.add(nb2);
 		nbList.add(nb3);
 		nbList.add(nb4);
-		hint = new Hint(nbList,2);
+		hint = new Hint(nbList, 2);
 		hint.giveHint();
 	}
 
+	/**
+	 * Test if the correct value will be assigned into the correct position.
+	 */
 	@Test
 	public void test1() {
 		int value = nbList.getNumberButton(2).getValue();
-		assertEquals("Test if cell is filled by correct answer: ",value,0);
+		assertEquals("Test if cell is filled by correct answer: ", value, 0);
 	}
 
 }

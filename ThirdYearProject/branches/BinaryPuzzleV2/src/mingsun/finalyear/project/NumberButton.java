@@ -6,16 +6,24 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 /**
- * the class designed to represent one single number button which is clickable, 
+ * the class designed to represent one single number button which is clickable,
  * for each click it change its value and icon from 0 to 1 to empty.
+ * 
  * @author Ming Sun
- * @param One ImageIcon
- * @param Zero ImageIcon
- * @param OneU ImageIcon
- * @param ZeroU ImageIcon
- * @param value integer
- * @param ID integer
+ * @param One
+ *            ImageIcon
+ * @param Zero
+ *            ImageIcon
+ * @param OneU
+ *            ImageIcon
+ * @param ZeroU
+ *            ImageIcon
+ * @param value
+ *            integer
+ * @param ID
+ *            integer
  * @editable Boolean
  */
 public class NumberButton extends JButton implements ActionListener {
@@ -24,9 +32,12 @@ public class NumberButton extends JButton implements ActionListener {
 	private int value = 2;
 	private int ID;
 	private boolean editable = true;
+
 	/**
 	 * Constructor.
-	 * @param ID integer of number index.
+	 * 
+	 * @param ID
+	 *            integer of number index.
 	 */
 	public NumberButton(int ID) {
 		setBackground(Color.white);
@@ -37,6 +48,7 @@ public class NumberButton extends JButton implements ActionListener {
 		ZeroU = new ImageIcon("./resource/number0u.png");
 		this.addActionListener(this);
 	}
+
 	/**
 	 * Action performed method to change icon when clicked.
 	 */
@@ -60,6 +72,7 @@ public class NumberButton extends JButton implements ActionListener {
 			}
 		}
 	}
+
 	/**
 	 * Reset button's icon.
 	 */
@@ -96,36 +109,48 @@ public class NumberButton extends JButton implements ActionListener {
 			}
 		}
 	}
+
 	/**
 	 * Get method to get id.
+	 * 
 	 * @return integer
 	 */
 	public int getID() {
 		return ID;
 	}
+
 	/**
 	 * Get method to get value.
+	 * 
 	 * @return integer
 	 */
 	public int getValue() {
 		return value;
 	}
+
 	/**
 	 * Set method to set value of button.
-	 * @param value integer
+	 * 
+	 * @param value
+	 *            integer
 	 */
 	public void setValue(int value) {
 		this.value = value;
 	}
+
 	/**
 	 * Set method to change editable.
-	 * @param boo boolean
+	 * 
+	 * @param boo
+	 *            boolean
 	 */
 	public void setEditable(boolean boo) {
 		this.editable = boo;
 	}
+
 	/**
 	 * Get method to get editable of button.
+	 * 
 	 * @return boolean
 	 */
 	public boolean getEditable() {
