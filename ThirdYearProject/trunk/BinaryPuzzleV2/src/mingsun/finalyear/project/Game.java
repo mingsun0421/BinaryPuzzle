@@ -72,7 +72,7 @@ public class Game extends JFrame {
 	/**
 	 * solveType: 1: Brute Force. 2: Backtrack. 3: Strategic BK. 4. LG
 	 */
-	public int solveType = 1;
+	public int solveType = 2;
 	private int level = 1;
 	private JMenuItem bruteForce, pureLogic;
 
