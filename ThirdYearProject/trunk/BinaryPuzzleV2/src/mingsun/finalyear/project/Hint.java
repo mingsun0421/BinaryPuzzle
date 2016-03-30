@@ -70,6 +70,10 @@ public class Hint {
 		while (pIndex < positions.size()) {
 			System.out.println("TYR: " + count);
 			System.out.println("INDEX:  " + pIndex);
+			if(pIndex == -1) {
+				JOptionPane.showMessageDialog(null, "Wrong input.");
+				break;
+			}
 			System.out.println(" MARKED: " + marked.get(pIndex));
 			if (marked.get(pIndex) == 0) {
 				numberButtonList.getNumberButton(positions.get(pIndex)).setValue(1);
