@@ -42,10 +42,10 @@ public class NumberButton extends JButton implements ActionListener {
 	public NumberButton(int ID) {
 		setBackground(Color.white);
 		this.ID = ID;
-		One = new ImageIcon("./resource/number1.png");
-		OneU = new ImageIcon("./resource/number1u.png");
-		Zero = new ImageIcon("./resource/number0.png");
-		ZeroU = new ImageIcon("./resource/number0u.png");
+		One = new ImageIcon("./resource/images/number1.png");
+		OneU = new ImageIcon("./resource/images/number1u.png");
+		Zero = new ImageIcon("./resource/images/number0.png");
+		ZeroU = new ImageIcon("./resource/images/number0u.png");
 		this.addActionListener(this);
 	}
 
